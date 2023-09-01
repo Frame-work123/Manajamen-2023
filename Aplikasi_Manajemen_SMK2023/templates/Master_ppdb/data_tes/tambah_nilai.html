@@ -1,0 +1,71 @@
+{% include "Master_ppdb/head_atas.html" %}
+<script type="text/javascript">
+  function sum(){
+    var jumlah_nilai=document.getElementById('jumlah_nilai').value;    
+    var result =(parseInt(jumlah_nilai) / parseFloat(1.1));
+    if (!isNaN(result)){
+      document.getElementById('rata_nilai').value = result.toFixed(1);
+    }
+  }
+</script>
+<div class="row">
+              <div class="col-md-12 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2><i class="fa fa-files-o"></i> <b>FORM TAMBAH NILAI TES SOAL (PPDB)</b></h2>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+                    <br />
+                    <form class="form-horizontal form-label-left" enctype="multipart/form-data" method="post">
+                    {% csrf_token %}
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">No KTP</label>
+                        <div class="col-md-9 col-sm-9 col-xs-12">
+                          <input type="text" class="form-control" placeholder="Enter No KTP" required name="no_ktp" value="{{edit_nilai.no_ktp}}" maxlength="16">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Nama Lengkap</label>
+                        <div class="col-md-9 col-sm-9 col-xs-12">
+                          <input type="text" class="form-control" placeholder="Enter Nama Lengkap" required name="nama_lengkap" value="{{edit_nilai.nama_lengkap}}">
+                        </div>
+                      </div>
+                       <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Nilai Ujian</label>
+                        <div class="col-md-9 col-sm-9 col-xs-12">
+                          <input type="text" class="form-control" placeholder="Enter Jumlah Nilai" required name="jumlah_nilai" id="jumlah_nilai" onkeyup="sum();">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Rata-Rata</label>
+                        <div class="col-md-9 col-sm-9 col-xs-12">
+                          <input type="text" class="form-control" id="rata_nilai"  onkeyup="sum();" required name="rata_nilai" readonly>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Tanggal Tes</label>
+                        <div class="col-md-9 col-sm-9 col-xs-12">
+                          <input type="text" class="form-control" required name="tanggal_tes" value="{{edit_nilai.tanggal_tes}}" readonly>
+                        </div>
+                      </div>
+                      <div class="ln_solid"></div>
+                      <div class="form-group">
+                        <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-3">
+                          <button type="submit" class="btn btn-success">
+                            <i class="fa fa-save"></i> Submit</button>
+                          <button class="btn btn-warning" type="reset">
+                            <i class="fa fa-refresh"></i> Reset</button>
+                          <a href="{% url 'Soal_ppdb' %}" class="btn btn-danger">
+                            <i class="fa fa-close"></i> Cancel</a>
+                        </div>
+                      </div>
+
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+            </div>
+            </div>
+{% include "Master_ppdb/head_bawah.html" %}

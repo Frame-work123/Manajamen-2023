@@ -1,0 +1,72 @@
+<!<html>
+<head>
+  <title>LAPORAN</title>
+</head>
+<body>
+<link href="/static/print/style.css" rel="stylesheet" type="text/css" />
+
+<style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+ 
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 10px;
+        }
+        th {
+            background-color: rgb(19, 110, 170);
+            color: white;
+        }
+        tr:hover {background-color: #f5f5f5;}
+</style>
+<div id="container">
+  <h1 align="center">
+    <strong style="font-family:'Times New Roman', Times, serif">
+  LAPORAN DATA GURU SMK</strong>
+  <p style="font-size: 12px;">SMK INSAN TERPADU, KEC. PAITON, KAB.PROBOLINGGO</p>
+</h1>
+  <div id="body">
+                    <table>
+                      <thead>
+                        <tr>
+                          <th>No</th>
+                          <th>NIDN</th>
+                          <th>Nama Lengkap</th>
+                          <th>Alamat Lengkap</th>
+                          <th>Tempat Lahir</th>
+                          <th>JK</th>
+                          <th>No-HP</th>
+                          <th>Jabatan</th>
+                          <th>Foto</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {% for tampil in lp_guru %}
+                        <tr>
+                        <td>{{forloop.counter}}</td>
+                        <td>{{tampil.nidn}}</td>
+                        <td>{{tampil.nama}}</td>
+                        <td>{{tampil.alamat}}</td>
+                        <td>{{tampil.tempat_lahir}}</td>
+                        <td>{{tampil.jk}}</td>
+                        <td>{{tampil.nohp}}</td>
+                        <td>{{tampil.jabatan}}</td>
+                        <td>
+                          <img src="{{ tampil.foto.url }}" style="width: 50px">
+                        </td>
+                        </tr>   
+                        {% endfor %}           
+                      </tbody>
+                    </table>
+                    <div align="right">
+                      <h2>TTD, {{tanggal_sekarang}}</h2><br><br><br><br>
+                      <h2>(.........................)</h2>
+                    </div>
+                  </div>
+    </div>
+  </body>
+  </html>

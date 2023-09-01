@@ -1,0 +1,94 @@
+<!<html>
+<head>
+  <title>LAPORAN</title>
+</head>
+<body>
+<link href="/static/print/style.css" rel="stylesheet" type="text/css" />
+
+<style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+ 
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 10px;
+        }
+        th {
+            background-color: rgb(19, 110, 170);
+            color: white;
+        }
+        tr:hover {background-color: #f5f5f5;}
+</style>
+<div id="container">
+  <h1 align="center">
+    <strong style="font-family:'Times New Roman', Times, serif">
+  LAPORAN DATA TANGGUNGAN PEMBAYARAN </strong>
+  <p style="font-size: 12px;">SMK INSAN TERPADU, KEC. PAITON, KAB.PROBOLINGGO</p>
+</h1>
+  <div id="body">
+                    <table>
+                      <thead>
+                        <tr>
+                          <th>No</th>
+                          <th>Jenis Pembayaran</th>
+                          <th>NIS</th>
+                          <th>Nama</th>
+                          <th>Kelas</th>
+                          <th>Jurusan</th>
+                          <th>Semester</th>
+                          <th>Tahun Akademik</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {% for tampil in data %}
+                        <tr>
+                        <td>{{forloop.counter}}</td>
+                        <td>{{tampil.jenis_pembayaran}}</td>
+                        <td>{{tampil.nis}}</td>
+                        <td>{{tampil.nama_siswa}}</td>
+                        <td>{{tampil.kelas}}</td>
+                        <td>{{tampil.jurusan}}</td>
+                        <td>{{tampil.semester}}</td>
+                        <td>{{tampil.tahun_akademik}}</td>                        
+                        </tr>   
+                        {% endfor %}           
+                      </tbody>
+                    </table>
+                    
+                  <div align="right">
+                            <table style="width: 400px">
+                              <tbody>
+                              {% for tampil in data %}   
+                              <tr>
+                                  <th style="width:50%">Total:</th>
+                                  <td>
+                                    Rp. <b>{{tampil.total}}</b>
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <th style="width:50%">Tanggungan:</th>
+                                  <td>
+                                    {% if tampil.jumlah_tanggungan == tampil.total %}
+                                    <b>Lunas</b>
+                                    <b>{{tampil.jumlah_tanggungan}}</b>
+                                    {% elif tampil.jumlah_tanggungan <= tampil.total %}
+                                    Rp. <b style="color: red;">{{tampil.jumlah_tanggungan}}</b>
+                                    {% endif %}
+                                  </td>
+                                </tr>
+                                {% endfor %}                               
+                              </tbody>
+                            </table>
+                    </div>
+                </div>
+                 <div align="center">
+                      <h2>TTD, {{tanggal_sekarang}}</h2><br><br><br><br>
+                      <h2>(.........................)</h2>
+                    </div>
+              </div>
+    </body>
+    </html>

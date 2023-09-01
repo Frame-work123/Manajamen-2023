@@ -1,0 +1,176 @@
+{% include "head_atas.html" %}
+
+ <div class="row">
+              <div class="col-md-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2><b>PROSES KETERANGAN NILAI RAPORT</b></h2>
+                    
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+
+                    <section class="content invoice">
+                      <!-- title row -->
+                      <div class="row">
+                        <div class="col-xs-12 invoice-header">
+                          <h1>
+                          <i class="fa fa-child"></i> NILAI SMK
+                          <div class="pull-right">
+                            <div class="title_right">
+                
+              </div>
+                          </div>
+                          </h1>
+                        </div>
+                        <!-- /.col -->
+                      </div>
+                      <!-- info row -->                      
+                      <div class="row invoice-info">
+                        <div class="x_panel">
+                        <div class="col-sm-4 invoice-col">                          
+                          <b><i class="fa fa-user"></i> Identitas Siswa</b>
+                          <address>
+                            <table class="table">
+                              <tr>
+                                
+                                <td>
+                                  <table class="table-striped table">
+                                    <tr>
+                                      <td>Nama Lengkap : <strong>{{edit_nilai_r.nama_siswa}}</strong></td>
+                                    </tr>
+                                    
+                                  </table>  
+                                  </td>                                
+                              </tr>
+                              
+                            </table>
+                          </address>
+                        </div>
+                        <!-- /.col -->
+                        <div class="col-sm-4 invoice-col">
+                          <b><i class="fa fa-bullhorn"></i> Jurusan</b><br>
+                          <address>
+                            <br>
+                              <strong style="font-size: 19px" class="label label-default">{{edit_nilai_r.nama_jurusan}}</strong>
+                            </address>
+                        </div>
+                        <!-- /.col -->
+                        <div class="col-sm-4 invoice-col">
+                          <b><i class="fa fa-building"></i> Kelas</b><br>
+                          <address><br>
+                          <strong style="font-size: 19px" class="label label-default">{{edit_nilai_r.nama_kelas}}</strong>
+                        </address>
+                        </div>
+                        <!-- /.col -->
+                      </div>
+                      </div>
+                      <!-- /.row -->
+
+                      <!-- Table row -->
+                      <form method="post">
+                        {% csrf_token %}
+                      <div class="row">
+                        <!-- accepted payments column -->
+                        <div class="col-xs-6">
+                          <p class="lead">Ekstra Kurikuler:</p>
+                          <div class="text-muted well well-sm no-shadow" style="margin-top: 10px;">
+                           <table class="table">
+                            <tr>
+                              <td><b>Kegiatan Ekstra Kurikuler</b></td><td>:</td>
+                              <td><input type="text" class="form-control" name="kegiatan_ekstra" required placeholder="Enter Kegiatan Ekstra" value="{{edit_nilai_r.kegiatan_ekstra}}"></td>
+                            </tr>
+                            <tr>
+                              <td><b>Kegiatan Ekstra Kurikuler</b></td><td>:</td>
+                              <td>
+                                <textarea class="form-control" name="keterangan_esktra" rows="2" required placeholder="Enter Keterangan Ekstra">{{edit_nilai_r.keterangan_esktra}}</textarea>
+                              </td>
+                            </tr>
+                           </table>
+                          </div>                         
+                        </div>
+                        <div class="col-xs-6">
+                           <p class="lead">Prestasi:</p>
+                          <div class="text-muted well well-sm no-shadow" style="margin-top: 10px;">
+                           <table class="table">
+                            <tr>
+                              <td><b>Prestasi</b></td><td>:</td>
+                              <td><input type="text" class="form-control" name="prestasi" required placeholder="Enter Prestasi" value="{{edit_nilai_r.prestasi}}"></td>
+                            </tr>
+                            <tr>
+                              <td><b>Kegiatan Prestasi</b></td><td>:</td>
+                              <td>
+                                <textarea class="form-control" name="keterangan_prestasi" rows="2" required placeholder="Enter Keterangan Prestasi">{{edit_nilai_r.keterangan_prestasi}}</textarea>
+                              </td>
+                            </tr>
+                           </table>
+                          </div>
+                        </div>
+                        <div class="col-xs-6">
+                           <p class="lead">Ketidak Hadiran:</p>
+                          <div class="text-muted well well-sm no-shadow" style="margin-top: 10px;">
+                           <table class="table">
+                            <tr>
+                              <td><b>Jumlah Sakit</b></td><td>:</td>
+                              <td><input type="number" class="form-control" name="jml_sakit" required value="{{edit_nilai_r.jml_sakit}}"></td>
+                            </tr>
+                            <tr>
+                              <td><b>Jumlah Izin</b></td><td>:</td>
+                              <td><input type="number" class="form-control" name="jml_izin" required value="{{edit_nilai_r.jml_izin}}"></td>
+                            </tr>
+                            <tr>
+                              <td><b>Tanpa Keterangan</b></td><td>:</td>
+                              <td><input type="number" class="form-control" name="tanpa_keterangan" required value="{{edit_nilai_r.tanpa_keterangan}}"></td>
+                            </tr>
+                           </table>
+                          </div>
+                        </div>
+                        <!-- /.col -->
+                        <div class="col-xs-6">
+                          <p class="lead">Nilai Raport :</p>
+                          <div class="table-responsive">
+                            <table class="table">
+                              <tbody>
+                                <tr>
+                                  <th style="width:50%">Jumlah Nilai:</th>
+                                  <td>
+                                    <input type="text" name="jumlah_nilai" class="form-control" placeholder="...." readonly id="jumlah_nilai" onkeyup="sum();" value="{{edit_nilai_r.jumlah_nilai}}"></td>
+                                </tr>
+                                <tr>
+                                  <th>Rata-Rata:</th>
+                                  <td>
+                                    <input type="text" name="rata_rata" class="form-control" placeholder="...." readonly id="rata_rata" onkeyup="sum();" value="{{edit_nilai_r.rata_rata}}"></td>
+                                </tr>
+                              </tbody>
+                            </table>
+                            <hr>
+                            <label>Naik Kelas / Lulus</label>
+                            <p>
+      <input type="radio" class="flat" name="keterangan_raport" id="genderM" value="X (Sepuluh)" required {% if edit_nilai_r.keterangan_raport == "X (Sepuluh)" %}checked="checked"{% endif %}/> X (Sepuluh) 
+      <input type="radio" class="flat" name="keterangan_raport" id="genderF" value="XI (Sebelas)"  {% if edit_nilai_r.keterangan_raport == "XI (Sebelas)" %}checked="checked"{% endif %}/> XI (Sebelas)
+      <input type="radio" class="flat" name="keterangan_raport" id="genderF" value="XII (Dua Belas)"  {% if edit_nilai_r.keterangan_raport == "XII (Dua Belas)" %}checked="checked"{% endif %}/> XII (Dua Belas)
+      <input type="radio" class="flat" name="keterangan_raport" id="genderF" value="Lulus"  {% if edit_nilai_r.jk == "Lulus" %}checked="checked"{% endif %}/> Lulus
+      </p>
+                          </div>
+                        </div>
+                        <!-- /.col -->
+                      </div>
+                    <!-- this row will not appear when printing -->
+                      <div class="row no-print">
+                        <div class="col-xs-12">
+                          <!-- <button class="btn btn-default" onclick="window.print();"><i class="fa fa-print"></i> Print</button> -->
+                          
+                          <a href="{% url 'Nilai' %}" class="btn btn-danger pull-right">
+                            <i class="fa fa-close"></i> Cancel</a>
+                          <button class="btn btn-primary pull-right" style="margin-right: 5px;"><i class="fa fa-download"></i> Submit</button>
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </div>
+              </form>
+              </div>
+            </div>
+          </div>
+        </div>
+{% include "head_bawah.html" %}

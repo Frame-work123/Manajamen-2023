@@ -1,0 +1,66 @@
+<!<html>
+<head>
+  <title>LAPORAN</title>
+</head>
+<body>
+<link href="/static/print/style.css" rel="stylesheet" type="text/css" />
+
+<style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+ 
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 10px;
+        }
+        th {
+            background-color: rgb(19, 110, 170);
+            color: white;
+        }
+        tr:hover {background-color: #f5f5f5;}
+</style>
+<div id="container">
+  <h1 align="center">
+    <strong style="font-family:'Times New Roman', Times, serif">
+  LAPORAN DATA MATA PELAJARAN SMK</strong>
+  <p style="font-size: 12px;">SMK INSAN TERPADU, KEC. PAITON, KAB.PROBOLINGGO</p>
+</h1>
+  <div id="body">
+  {% for mapel in kl_mapel %}  
+  <h2>
+    <b>Kelompok Mapel : {{mapel.kelompok_mapel}}</b>
+  </h2>
+  {% endfor %}
+                 <table>
+                      <thead>                      
+                        <tr>
+                          <th>No</th>
+                          <th>Kode Mapel</th>
+                          <th>Nama Mapel</th>
+                          <th>Keterangan</th>
+                        </tr>
+                      </thead>                      
+                      <tbody>
+                        {% for tampil in lp_mapel %}
+                        <tr>
+                          <td>{{forloop.counter}}</td>
+                          <td>{{tampil.kode_mapel}}</td>
+                          <td>{{tampil.nama_mapel}}</td>
+                          <td>{{tampil.keterangan}}</td>                        
+                        </tr>
+                        {% endfor %}
+                        
+                      </tbody>
+                    </table>
+                     <div align="right">
+                      <h2>TTD, {{tanggal_sekarang}}</h2><br><br><br><br>
+                      <h2>(.........................)</h2>
+                    </div>
+                  </div>
+                </div>
+</body>
+</html>

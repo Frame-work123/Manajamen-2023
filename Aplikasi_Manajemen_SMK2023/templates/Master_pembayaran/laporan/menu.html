@@ -1,0 +1,61 @@
+{% include "Master_pembayaran/head_atas.html" %}
+<div class="row">
+	 <div class="col-md-9 col-sm-6 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2><i class="fa fa-bars"></i> MENU LAPORAN PEMBAYARAN</h2>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+
+                    <div class="col-xs-3">
+                      <!-- required for floating -->
+                      <!-- Nav tabs -->
+                      <ul class="nav nav-tabs tabs-left">
+                        <li class="active"><a href="#home" data-toggle="tab"><i class="fa fa-download"></i> Laporan</a>
+                        </li>
+                        <li><a href="#lp_siswa" data-toggle="tab"><i class="fa fa-files-o"></i> Laporan Pembayaran</a>
+                        </li>
+                        <li><a href="#lp_guru" data-toggle="tab"><i class="fa fa-files-o"></i> Laporan Tanggungan</a>
+                        </li>
+                      </ul>
+                    </div>
+
+                    <div class="col-xs-9">
+                      <!-- Tab panes -->
+                      <div class="tab-content">
+                        <div class="tab-pane active" id="home">
+                          <p class="lead"><b>Laporan</b></p>
+                          <p align="justify">Lakukan proses pembuatan laporan tentang manajemen sekolah dengan memilih fitur menu di halaman ini. Dan lakukan sesuai dengan kebutuhan manajemen.</p>
+                        </div>
+                        <div class="tab-pane" id="lp_siswa">
+                        	<p class="lead"><b>Laporan Data Pembayaran</b></p>
+                        	<label>Semester</label>
+                           <form method="get" action="{% url 'lp_semester' %}" target="_blank">
+                            <input type="text" name="cari_data" class="form-control" placeholder="Enter semester">
+                          <button class="btn btn-info" style="margin-right: 5px;"><i class="fa fa-print"></i> Cetak Laporan</button>
+                          </form>
+
+                    			<a href="{% url 'lp_pembayaran' %}" target="_blank" class="btn btn-primary pull-right" style="margin-right: 5px;"><i class="fa fa-print"></i> Cetak All.</a>
+                        	
+                        </div>
+                        <div class="tab-pane" id="lp_guru">
+                          <p class="lead"><b>Laporan Tanggungan Pembayaran</b></p>
+                          <hr>
+                          <form method="get" action="{% url 'lp_tanggungan' %}" target="_blank">
+                            <input type="text" name="cari_data" class="form-control" placeholder="Enter NIS">
+                          <button class="btn btn-primary pull-right" style="margin-right: 5px;"><i class="fa fa-print"></i> Cetak Laporan</button>
+                          </form>
+                        </div>
+                       
+                      </div>
+                    </div>
+
+                    <div class="clearfix"></div>
+
+                  </div>
+                </div>
+              </div>
+</div>
+</div></div></div>
+{% include "Master_pembayaran/head_bawah.html" %}

@@ -1,0 +1,72 @@
+{% include "head_atas.html" %}
+<div class="row">
+<form method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+
+  <div class="col-md-8 col-xs-8 widget widget_tally_box">
+                        <div class="x_panel fixed_height_390">
+                          <div class="x_content">
+
+                            <div class="flex">
+                              <ul class="list-inline widget_profile_box">
+                                <li>
+                                  <a>
+                                    <i class="fa fa-facebook"></i>
+                                  </a>
+                                </li>
+                                <li>
+                                  <img src="{{ edit_siswa.foto.url }}" alt="..." class="img-circle profile_img">
+                                </li>
+                                <li>
+                                  <a>
+                                    <i class="fa fa-users"></i>
+                                  </a>
+                                </li>
+                              </ul>
+                            </div>
+
+                            <h3 class="name">{{edit_siswa.nama_lengkap}}
+                              <small>{{edit_siswa.nis}}</small>
+                            
+                            </h3>
+
+                            <div class="flex">
+                                  <table class="table">
+                                    <tr>
+                                      <td><span>Jurusan : {{edit_siswa.jurusan}}</span></td>
+                                      <td><span>Kelas : {{edit_siswa.kelas}}</span></td>
+                                    </tr>
+                                  </table>
+                            </div>
+                            <p>
+                              SMK INSAN TERPADU<br>
+              <span>Kecamatan Paiton, Kab. Probolinggo, Provinsi Prov. Jawa Timur</span>
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+
+<div class="col-md-5 col-xs-12 widget widget_tally_box">
+  <div class="x_panel fixed_height_390">
+  <div class="x_content">    
+    <h5><i class="fa fa-user"></i> UPDATE FOTO SISWA</h5><hr>
+    <label>Pilih Foto</label>
+    <input type="file" name="foto" required="Foto" class="form-control" />
+    <hr>
+  <div class="form-actions center">
+    <button type="submit" class="btn btn-sm btn-success">
+    Simpan
+      <i class="ace-icon fa fa-download icon-on-right bigger-110"></i>
+    </button>
+
+    <a href="{% url 'Siswa' %}" class="btn btn-danger">
+    <i class="fa fa-close"></i> Cancel</a>
+  </div>
+</div>
+</div>
+</form>
+  </div>
+</div>
+              </div>
+            </div>
+{% include "head_bawah.html" %}

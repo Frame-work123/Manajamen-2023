@@ -1,0 +1,77 @@
+<!<html>
+<head>
+  <title>LAPORAN</title>
+</head>
+<body>
+<link href="/static/print/style.css" rel="stylesheet" type="text/css" />
+
+<style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+ 
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 10px;
+        }
+        th {
+            background-color: rgb(19, 110, 170);
+            color: white;
+        }
+        tr:hover {background-color: #f5f5f5;}
+</style>
+<div id="container">
+  <h1 align="center">
+    <strong style="font-family:'Times New Roman', Times, serif">
+  LAPORAN DATA NILAI SISWA SMK</strong>
+  <p style="font-size: 12px;">SMK INSAN TERPADU, KEC. PAITON, KAB.PROBOLINGGO</p>
+</h1>
+  <div id="body">
+{% for L in data %}
+<h3 align="justify">
+<b> No Induk &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: {{L.no_induk}}</b><br>
+<b> Nama Siswa : {{L.nama_siswa}}</b><br>
+<b> Jurusan &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: {{L.nama_jurusan}}</b><br>
+<b>Kelas &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: {{L.nama_kelas}}</b>
+</h3>
+{% endfor %}
+                    <table>
+                      <thead>
+                        <tr>
+                          <th>No</th>
+                          <th>Nama Mata Pelajaran</th>
+                          <th>Kelompok Mapel</th>
+                          <th>Nilai Pengetahuan</th>
+                          <th>Nilai Keterampilan</th>
+                          <th>(KKM)</th>
+                          <th>Jumlah Nilai</th>
+                          <th>Rata-Rata</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                          {% for tampil in lp_nilai %}
+                        <tr>
+                        <td>{{forloop.counter}}</td>
+                        <td>{{tampil.nama_mapel}}</td>
+                        <td>{{tampil.kelompok_mapel}}</td>
+                        <td>{{tampil.nilai_pengetahuan}}</td>
+                        <td>{{tampil.nilai_keterampilan}}</td>
+                        <td>{{tampil.nilai_kkm}}</td>
+                        <td>{{tampil.jumlah_nilai}}</td>
+                        <td>{{tampil.rata_rata}}</td>
+                        
+                        </tr>   
+                        {% endfor %}  
+                      </tbody>
+                    </table>
+                    <div align="right">
+                      <h2>TTD, {{tanggal_sekarang}}</h2><br><br><br><br>
+                      <h2>(.........................)</h2>
+                    </div>
+                  </div>
+       </div>
+     </body>
+     </html>

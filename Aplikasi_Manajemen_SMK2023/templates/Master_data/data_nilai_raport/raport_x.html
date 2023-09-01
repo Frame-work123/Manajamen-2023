@@ -1,0 +1,462 @@
+<!<html>
+<head>
+  <title>LAPORAN</title>
+</head>
+<body>
+<link href="/static/print/style.css" rel="stylesheet" type="text/css" />
+
+<style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+ 
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 10px;
+        }
+        th {
+            background-color: rgb(19, 110, 170);
+            color: white;
+        }
+        tr:hover {background-color: #f5f5f5;}
+</style>
+<div id="container">
+  <div id="body">
+                    <br>
+                    {% for tampil in data_raport %}
+                    
+                   <table>
+                     <tr>
+                      <td>
+                        <table style="width: 100%">
+                          <tr style="font-size: 16px">
+                           <td><b>Nama Sekolah</b></td><td>:</td><td><b>SMK INSAN TERPADU</b></td>
+                         </tr>
+                         <tr style="font-size: 16px">
+                           <td><b>Alamat </b></td><td>:</td><td><b>JL Kota Anyar, Kec.Kota Anyar</b></td>
+                         </tr>
+                         <tr style="font-size: 16px">
+                           <td><b>Nama Siswa</b></td><td>:</td><td><b>{{tampil.nama_siswa}}</b></td>
+                         </tr>
+                         <tr style="font-size: 16px">
+                           <td><b>Nomor Induk</b></td><td>:</td><td><b>{{tampil.no_induk}}</b></td>
+                         </tr>
+                        </table>
+                      </td>
+                      <td>
+                        <table style="width: 100%">
+                          <tr style="font-size: 16px">
+                           <td><b>Kelas</b></td><td>:</td><td><b>{{tampil.nama_kelas}} {{tampil.nama_jurusan}}</b></td>
+                         </tr>
+                         <tr style="font-size: 16px">
+                           <td><b>Semester </b></td><td>:</td><td><b>Genap</b></td>
+                         </tr>
+                         <tr style="font-size: 16px">
+                           <td><b>Tahun Pelajaran</b></td><td>:</td><td><b>2023 / 2024</b></td>
+                         </tr>                         
+                        </table>
+                      </td>
+                     </tr>
+                   </table>
+                   {% endfor %}          
+                   <h4><b>CAPAIAN HASIL BELAJAR</b></h4>
+                   <h4><b>A. Sikap Spritual</b></h4>
+                   <i>Baik dalam bersyukur, berdoa sebelum melakukan kegiatan, toleran pada agama yang berbeda, taat beribadah, santu, peduli, percaya diri, namun perlu diingatkan sikap jujur, disiplin, dan tanggung jawab.
+                   </i>
+                   <h4><b>B. Pengetahuan dan Keterampilan</b></h4>
+                   <table class="table table-bordered">
+                     <tr>
+                      <td rowspan="2" align="center"><b>No</b></td>
+                      <td rowspan="2" align="center"><b>Mata Pelajaran</b></td>
+                      <td colspan="4" align="center"><b>Pengetahuan</b></td>
+                      <td colspan="4" align="center"><b>Keterampilan</b></td>
+                     </tr>
+                     <!-- pengetahuan -->
+                     <tr>
+                        <td align="center"><b>KKM</b></td>
+                        <td align="center"><b>Angka</b></td>
+                        <td align="center"><b>Pred.</b></td>
+                        <td align="center"><b>Deskripsi</b></td>
+                        <!-- keterampilan -->
+                        <td align="center"><b>KKM</b></td>
+                        <td align="center"><b>Angka</b></td>
+                        <td align="center"><b>Pred.</b></td>
+                        <td align="center"><b>Deskripsi</b></td>
+                     </tr>
+                     {% for kelompok in kelompok_mapel %}
+                     <td colspan="10">
+                      {% if kelompok.kelompok_mapel == 'A' %}
+                      <b>Kelompok {{kelompok.kelompok_mapel}} (Wajib)</b>
+                      {% elif kelompok.kelompok_mapel == 'B' %}
+                      <b>Kelompok {{kelompok.kelompok_mapel}} (Wajib)</b>
+                      {% elif kelompok.kelompok_mapel == 'C' %}
+                      <b>Kelompok {{kelompok.kelompok_mapel}} (Peminatan)</b><br>
+                      <b>C1. Dasar Bidang Keahlian</b><br>
+                      <b>C2. Dasar Program Keahlian</b><br>
+                      <b>C3. Paket Keahlian</b>
+                      {% elif kelompok.kelompok_mapel == 'Mulok' %}
+                      <b>Kelompok {{kelompok.kelompok_mapel}}</b>
+                      {% endif %}
+                    </td>
+                     <!-- kelompok A Wajib Kelas X-->
+                      {% if kelompok.kelompok_mapel == 'A' %}
+                      {% for nilai_mapel in tampil_kelompok %}
+                     <tr>
+                      <td>{{forloop.counter}}</td>
+                      <td>{{nilai_mapel.nama_mapel}}</td>
+                      <!-- pengetahuan -->
+                      <td align="center">{{nilai_mapel.nilai_kkm}}</td>
+                      <td align="center">{{nilai_mapel.nilai_pengetahuan}}</td>
+                      <td align="center">
+                        {% if nilai_mapel.nilai_pengetahuan == nilai_mapel.nilai_kkm %}
+                          C
+                        {% elif nilai_mapel.nilai_pengetahuan >= '75' %}
+                          C+
+                        {% elif nilai_mapel.nilai_pengetahuan >= '80' %}
+                          B
+                        {% elif nilai_mapel.nilai_pengetahuan >= '85' %}
+                          B+
+                        {% elif nilai_mapel.nilai_pengetahuan >= '90' %}
+                          A
+                        {% elif nilai_mapel.nilai_pengetahuan >= '95' %}
+                          A+
+                        {% elif nilai_mapel.nilai_pengetahuan <= nilai_mapel.nilai_kkm %}
+                          E
+                        {% endif %}
+                      </td>
+                      <td>{{nilai_mapel.deskripsi_pengetahuan}}</td>
+                      <!-- keterampilan -->
+                      <td align="center">{{nilai_mapel.nilai_kkm}}</td>
+                      <td align="center">{{nilai_mapel.nilai_keterampilan}}</td>
+                      <td align="center">
+                        {% if nilai_mapel.nilai_keterampilan == '75' %}
+                          C
+                        {% elif nilai_mapel.nilai_keterampilan <= '75' %}
+                          C+
+                        {% elif nilai_mapel.nilai_keterampilan <= '80' %}
+                          B
+                        {% elif nilai_mapel.nilai_keterampilan >= '85' %}
+                          B+
+                        {% elif nilai_mapel.nilai_keterampilan >= '90' %}
+                          A
+                        {% elif nilai_mapel.nilai_keterampilan >= '95' %}
+                          A+
+                        {% elif nilai_mapel.nilai_keterampilan <= nilai_mapel.nilai_kkm %}
+                          E
+                        {% endif %}
+                      </td>
+                      <td>{{nilai_mapel.deskripsi_keterampilan}}</td>                     
+                     </tr>
+                      {% endfor %}
+                      {% endif %}
+
+                      <!-- kelompok B Wajib Kelas X-->
+                      {% if kelompok.kelompok_mapel == 'B' %}
+                      {% for nilai_mapel in tampil_kelompok_B %}
+                     <tr>
+                      <td>{{forloop.counter}}</td>
+                      <td>{{nilai_mapel.nama_mapel}}</td>
+                      <!-- pengetahuan -->
+                      <td align="center">{{nilai_mapel.nilai_kkm}}</td>
+                      <td align="center">{{nilai_mapel.nilai_pengetahuan}}</td>
+                      <td align="center">
+                        {% if nilai_mapel.nilai_pengetahuan == nilai_mapel.nilai_kkm %}
+                          C
+                        {% elif nilai_mapel.nilai_pengetahuan >= '75' %}
+                          C+
+                        {% elif nilai_mapel.nilai_pengetahuan >= '80' %}
+                          B
+                        {% elif nilai_mapel.nilai_pengetahuan >= '85' %}
+                          B+
+                        {% elif nilai_mapel.nilai_pengetahuan >= '90' %}
+                          A
+                        {% elif nilai_mapel.nilai_pengetahuan >= '95' %}
+                          A+
+                        {% elif nilai_mapel.nilai_pengetahuan <= nilai_mapel.nilai_kkm %}
+                          E
+                        {% endif %}
+                      </td>
+                      <td>{{nilai_mapel.deskripsi_pengetahuan}}</td>
+                      <!-- keterampilan -->
+                      <td align="center">{{nilai_mapel.nilai_kkm}}</td>
+                      <td align="center">{{nilai_mapel.nilai_keterampilan}}</td>
+                      <td align="center">
+                        {% if nilai_mapel.nilai_keterampilan == '75' %}
+                          C
+                        {% elif nilai_mapel.nilai_keterampilan <= '75' %}
+                          C+
+                        {% elif nilai_mapel.nilai_keterampilan <= '80' %}
+                          B
+                        {% elif nilai_mapel.nilai_keterampilan >= '85' %}
+                          B+
+                        {% elif nilai_mapel.nilai_keterampilan >= '90' %}
+                          A
+                        {% elif nilai_mapel.nilai_keterampilan >= '95' %}
+                          A+
+                        {% elif nilai_mapel.nilai_keterampilan <= nilai_mapel.nilai_kkm %}
+                          E
+                        {% endif %}
+                      </td>
+                      <td>{{nilai_mapel.deskripsi_keterampilan}}</td>                     
+                     </tr>
+                      {% endfor %}
+                      {% endif %}
+
+                      <!-- kelompok C Peminatan Kelas X-->
+                      {% if kelompok.kelompok_mapel == 'C' %}
+                      {% for nilai_mapel in tampil_kelompok_C %}
+                     <tr>
+                      <td>{{forloop.counter}}</td>
+                      <td>{{nilai_mapel.nama_mapel}}</td>
+                      <!-- pengetahuan -->
+                      <td align="center">{{nilai_mapel.nilai_kkm}}</td>
+                      <td align="center">{{nilai_mapel.nilai_pengetahuan}}</td>
+                      <td align="center">
+                        {% if nilai_mapel.nilai_pengetahuan == nilai_mapel.nilai_kkm %}
+                          C
+                        {% elif nilai_mapel.nilai_pengetahuan >= '75' %}
+                          C+
+                        {% elif nilai_mapel.nilai_pengetahuan >= '80' %}
+                          B
+                        {% elif nilai_mapel.nilai_pengetahuan >= '85' %}
+                          B+
+                        {% elif nilai_mapel.nilai_pengetahuan >= '90' %}
+                          A
+                        {% elif nilai_mapel.nilai_pengetahuan >= '95' %}
+                          A+
+                        {% elif nilai_mapel.nilai_pengetahuan <= nilai_mapel.nilai_kkm %}
+                          E
+                        {% endif %}
+                      </td>
+                      <td>{{nilai_mapel.deskripsi_pengetahuan}}</td>
+                      <!-- keterampilan -->
+                      <td align="center">{{nilai_mapel.nilai_kkm}}</td>
+                      <td align="center">{{nilai_mapel.nilai_keterampilan}}</td>
+                      <td align="center">
+                        {% if nilai_mapel.nilai_keterampilan == '75' %}
+                          C
+                        {% elif nilai_mapel.nilai_keterampilan <= '75' %}
+                          C+
+                        {% elif nilai_mapel.nilai_keterampilan <= '80' %}
+                          B
+                        {% elif nilai_mapel.nilai_keterampilan >= '85' %}
+                          B+
+                        {% elif nilai_mapel.nilai_keterampilan >= '90' %}
+                          A
+                        {% elif nilai_mapel.nilai_keterampilan >= '95' %}
+                          A+
+                        {% elif nilai_mapel.nilai_keterampilan <= nilai_mapel.nilai_kkm %}
+                          E
+                        {% endif %}
+                      </td>
+                      <td>{{nilai_mapel.deskripsi_keterampilan}}</td>                     
+                     </tr>
+                      {% endfor %}
+                      {% endif %}
+                      <!-- kelompok Mulok Kelas X-->
+                      {% if kelompok.kelompok_mapel == 'Mulok' %}
+                      {% for nilai_mapel in tampil_kelompok_mulok %}
+                     <tr>
+                      <td>{{forloop.counter}}</td>
+                      <td>{{nilai_mapel.nama_mapel}}</td>
+                      <!-- pengetahuan -->
+                      <td align="center">{{nilai_mapel.nilai_kkm}}</td>
+                      <td align="center">{{nilai_mapel.nilai_pengetahuan}}</td>
+                      <td align="center">
+                        {% if nilai_mapel.nilai_pengetahuan == nilai_mapel.nilai_kkm %}
+                          C
+                        {% elif nilai_mapel.nilai_pengetahuan >= '75' %}
+                          C+
+                        {% elif nilai_mapel.nilai_pengetahuan >= '80' %}
+                          B
+                        {% elif nilai_mapel.nilai_pengetahuan >= '85' %}
+                          B+
+                        {% elif nilai_mapel.nilai_pengetahuan >= '90' %}
+                          A
+                        {% elif nilai_mapel.nilai_pengetahuan >= '95' %}
+                          A+
+                        {% elif nilai_mapel.nilai_pengetahuan <= nilai_mapel.nilai_kkm %}
+                          E
+                        {% endif %}
+                      </td>
+                      <td>{{nilai_mapel.deskripsi_pengetahuan}}</td>
+                      <!-- keterampilan -->
+                      <td align="center">{{nilai_mapel.nilai_kkm}}</td>
+                      <td align="center">{{nilai_mapel.nilai_keterampilan}}</td>
+                      <td align="center">
+                        {% if nilai_mapel.nilai_keterampilan == '75' %}
+                          C
+                        {% elif nilai_mapel.nilai_keterampilan <= '75' %}
+                          C+
+                        {% elif nilai_mapel.nilai_keterampilan <= '80' %}
+                          B
+                        {% elif nilai_mapel.nilai_keterampilan >= '85' %}
+                          B+
+                        {% elif nilai_mapel.nilai_keterampilan >= '90' %}
+                          A
+                        {% elif nilai_mapel.nilai_keterampilan >= '95' %}
+                          A+
+                        {% elif nilai_mapel.nilai_keterampilan <= nilai_mapel.nilai_kkm %}
+                          E
+                        {% endif %}
+                      </td>
+                      <td>{{nilai_mapel.deskripsi_keterampilan}}
+
+                      </td>                     
+                     </tr>
+                      {% endfor %}
+                      {% endif %}
+
+
+
+                     {% endfor %}
+                     <!-- hitung jumlah nilai -->
+                    <tr id="nilai">
+                        <td colspan="2" align="center"><b>Jumlah Nilai</b></td><td>:</td>
+                        <td>
+                          <!-- nilai pengetahuan -->
+                          <input type="hidden"id="jml_nilai" value="{{ Nilai_pengetahuan.Jumlah }}">
+                          {{ Nilai_pengetahuan.Jumlah }}
+                        </td>                                 
+                        <td colspan="3"></td>
+                        <td>
+                          <!-- nilai keterampilan -->
+                        <input type="hidden" id="jml_nilai_K" value="{{ Nilai_keterampilan.Jumlah }}">
+                        {{ Nilai_keterampilan.Jumlah }}</td>
+                        <td></td>
+                        <td rowspan="2" align="center"><br><b>PERINGKAT : </b>
+                          
+                          
+                          <!-- {% if nil >= data_rap.max and data_rap.max >= nil  %}
+                          {{forloop.counter}}
+                          {% endif %} -->
+                         <!--  {% for f in data_rap %}
+                          {% if  forloop.counter|divisibleby:1 %}
+                          {{forloop.counter}}
+                          {% endif %}
+                          {% endfor %} -->
+                          {{data_rap.max}}
+                          
+                        </td>
+                      </tr>
+                      <tr>
+                        <td colspan="2" align="center"><b>Rata-Rata</b></td><td>:</td>
+                        <td>
+                          <!-- rata pengetahuan -->
+                          <input type="hidden" id="jumlah_mapel" value="{{N_rata_P.N_pengetahuan}}"> 
+                          <div id="result1"></div>
+                        </td>
+                        <td colspan="3"></td>
+                        <td>
+                          <!-- rata keterampilan -->
+                          <input type="hidden" id="jumlah_mapel_K" value="{{N_rata_K.N_keterampilan}}"> 
+                          <div id="result2"></div>
+                        </td>
+                        <td></td>                        
+                      </tr>
+                   </table>
+
+  
+<!-- tampil kriteria kurikuler raport -->
+<h4><b>D.Ekstra Kurikuler</b></h4>
+<table class="table table-bordered">
+  <tr>
+    <td>No</td>
+    <td>Kegiatan Ekstra Kurikuler</td>
+    <td>Keterangan</td>    
+  </tr>
+  {% for ekstra in kriteria %}
+  <tr>
+    <td>{{forloop.counter}}</td>
+    <td>{{ekstra.kegiatan_ekstra}}</td>
+    <td>{{ekstra.keterangan_esktra}}</td>
+  </tr>
+  {% endfor %}
+</table>
+<h4><b>E.Prestasi</b></h4>
+<table class="table table-bordered">
+  <tr>
+    <td>No</td>
+    <td>Prestasi</td>
+    <td>Keterangan</td>    
+  </tr>
+  {% for pres in prestasi %}
+  <tr>
+    <td>{{forloop.counter}}</td>
+    <td>{{pres.prestasi}}</td>
+    <td>{{pres.keterangan_prestasi}}</td>
+  </tr>
+  {% endfor %}
+</table>
+<!-- ketidak hadiran -->
+<h4><b>F.Ketidak Hadiran</b></h4>
+<table class="table table-bordered" style="width:40%">
+  {% for tdk in ketidak_hadiran %}
+  <tr>
+    <td>Sakit</td><td>:</td><td>{{tdk.jml_sakit}}</td><td>Hari</td>
+  </tr>
+  <tr>
+    <td>Izin</td><td>:</td><td>{{tdk.jml_izin}}</td><td>Hari</td>
+  </tr>
+  <tr>
+    <td>Tanpa Keterangan</td><td>:</td><td>{{tdk.tanpa_keterangan}}</td><td>Hari</td>
+  </tr>
+  {% endfor %}
+</table>
+<h4><b>G. Catatan Wali Kelas</b></h4>
+<div align="center" class="x_panel">
+  <b>Jadilah pribadi yang mandiri dan jangan terpengaruh oleh dunia luar yang dapat menjerumuskan pada hal-hal yang negatif serta rajinlah terus belas</b>
+</div>
+<h4><b>H. Tanggapan Orang Tua/Wali</b></h4>
+<div style="height: 90px;" class="x_panel">
+  
+</div>
+Keputusan:<br>
+Berdasarkan hasil yang dicapai pada semester 1 dan 2, Peserta didik ditetapkan : <br>
+<b>NAIK KE KELAS : </b>
+{% for naik in ketidak_hadiran %}
+<b>{{naik.keterangan_raport}}</b>
+{% endfor %}
+<br><br>
+<div align="center">
+<table>
+  <tr>
+    <td><b>Orang Tua/Wali</b><br><br><br><br><br>_____________________</td>
+    <td style="width: 70%"></td>
+    <td><b>Probolinggo, {{tanggal_sekarang}}</b><br><b>Wali Kelas</b><br><br><br><br>_____________________</td>
+  </tr>
+</table>
+<br>
+{% for kepala in kepala_sekolah %}
+<b>Mengetahui, <br> Kepala Sekolah</b><br><br><br><br>
+<u><b>{{kepala.nama}}</b></u>
+{% endfor %}
+</div>
+
+<!-- proses hitung rata pengetahuan -->
+  <script>
+    // pengetahuan
+    var jml_nilai=document.getElementById('jml_nilai').value;
+    var jumlah_mapel=document.getElementById('jumlah_mapel').value;    
+    var result =(parseInt(jml_nilai) / parseInt(jumlah_mapel));
+    document.getElementById("result1").innerHTML=result.toFixed(1);
+    // keterampilan
+    var jml_nilai_K=document.getElementById('jml_nilai_K').value;
+    var jumlah_mapel_K=document.getElementById('jumlah_mapel_K').value;    
+    var result2 =(parseInt(jml_nilai_K) / parseInt(jumlah_mapel_K));
+    document.getElementById("result2").innerHTML=result2.toFixed(1);
+    // hitung peringkat raport
+    var jml_k=document.getElementById('jml_nilai_K').value;
+    var jml_p=document.getElementById('jml_nilai').value;    
+    var peringkat =(parseInt(jml_k) + parseInt(jml_p));
+    document.getElementById("peringkat").value=peringkat.toFixed(1);
+    
+
+  </script>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,64 @@
+{% include "head_atas.html" %}
+<div class="row">
+              <div class="col-md-12 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2><i class="fa fa-files-o"></i> <b>EDIT DATA MATA PELAKARAN</b></h2>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+                    <br />
+                    <form class="form-horizontal form-label-left" enctype="multipart/form-data" method="post">
+                    {% csrf_token %}
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Kode Mapel </label>
+                        <div class="col-md-9 col-sm-9 col-xs-12">
+                          <input type="text" class="form-control" placeholder="Enter Kode Mapel" required name="kode_mapel" maxlength="5" value="{{edit_mapel.kode_mapel}}">
+                        </div>
+                      </div>
+                       <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Nama Mata Pelajaran</label>
+                        <div class="col-md-9 col-sm-9 col-xs-12">
+                          <input type="text" class="form-control" name="nama_mapel" required placeholder="Enter Nama Mata Pelajaran" value="{{edit_mapel.nama_mapel}}">
+                        </div>
+                      </div>
+                       <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Keterangan</label>
+                        <div class="col-md-9 col-sm-9 col-xs-12">
+                          <textarea class="form-control" name="keterangan" required placeholder="Enter Keterangan" rows="6">{{edit_mapel.keterangan}}</textarea>
+                        </div>
+                      </div>
+
+                       <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Kelompok Mapel</label>
+                        <div class="col-md-9 col-sm-9 col-xs-12">
+                          <select class="form-control" name="kelompok_mapel" required>
+                            <option>{{edit_mapel.kelompok_mapel}}</option>
+                                    <option value="">Kelompok Mapel</option>
+                                    <option>A</option>
+                                    <option>B</option>
+                                    <option>C</option>
+                                    <option>D</option>
+                                    <option>E</option>
+                                    <option>G</option>
+                                    <option>H</option>
+                                    <option>Mulok</option>
+                                  </select>
+                        </div>
+                      </div>
+                      <div class="ln_solid"></div>
+                      <div class="form-group">
+                        <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-3">
+                          <button type="submit" class="btn btn-success">
+                            <i class="fa fa-save"></i> Submit</button>						              
+                          <a href="{% url 'Mapel' %}" class="btn btn-danger">
+                            <i class="fa fa-close"></i> Cancel</a>
+                        </div>
+                      </div>
+
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+{% include "head_bawah.html" %}

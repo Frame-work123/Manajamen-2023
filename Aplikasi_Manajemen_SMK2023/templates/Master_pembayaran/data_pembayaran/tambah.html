@@ -1,0 +1,153 @@
+{% include "Master_pembayaran/head_atas.html" %}
+ <script type="text/javascript">
+  function sum(){
+    var nominal=document.getElementById('nominal').value;
+    var total=document.getElementById('total').value;
+    var result =(parseInt(nominal) - parseInt(total));
+    if (!isNaN(result)){
+      document.getElementById('jumlah_tanggungan').value = result;
+    }
+  }
+</script>
+<script language="JavaScript">
+function totalIt() {
+  var input = document.getElementsByName("nominal_bayar");
+  var total = 0;
+  for (var i = 0; i < input.length; i++) {
+    if (input[i].checked) {
+      total += parseFloat(input[i].value);
+    }
+  }
+  document.getElementById("total").value = total;
+}
+</script>
+<div class="row">
+              <div class="col-md-12">
+                <div class="x_panel">
+                  <div class="x_content">
+
+                    <section class="content invoice">
+                      <!-- title row -->
+                      <div class="row">
+                        <div class="col-xs-12 invoice-header">
+                          <h1>
+                                          <i class="fa fa-cc-paypal"></i> Proses Pembayaran Akademik & (PPDB)
+                                          <small class="pull-right">Date: {{tanggal_sekarang}}</small>
+                                      </h1>
+                        </div>
+                        <!-- /.col -->
+                      </div>
+                     <hr>
+                     <form method="get">
+                       <label>Cari Data</label>
+                       <div class="input-group">
+                            <span class="input-group-btn">
+                                <button type="submit" class="btn btn-primary"><i class="fa fa-user"></i> Search !</button>
+                            </span>
+                            <input type="text" name="cari_data" required placeholder="Enter NIS" class="form-control">
+                          </div>
+                       
+                     </form>
+                      <!-- Table row -->
+                      <div class="row">
+                        <div class="col-xs-12 table">
+                          <table class="table table-striped">
+                            <thead>
+                              <tr>
+                                <th>NIS</th>
+                                <th>Nama Siswa</th>
+                                <th>Kelas</th>
+                                <th>Jurusan</th>
+                                <th>Foto</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                               {% for tampil in data_siswa %}
+                                <tr>
+                                <td>{{tampil.nis}}</td>
+                                <td>{{tampil.nama_lengkap}}</td>
+                                <td>{{tampil.jurusan}}</td>
+                                <td>{{tampil.kelas}}</td>
+                                <td><img src="{{ tampil.foto.url }}" style="width: 40px"></td>
+                              </tr>
+                              {% endfor %}
+                            </tbody>
+                          </table>
+                        </div>
+                        <!-- /.col -->
+                      </div>
+                      <!-- /.row -->
+                      <form method="post" name="myform" id="theForm">
+                        {% csrf_token %}
+                        {% for data in data_siswa %}
+                        <input type="hidden" required name="nis" value="{{data.nis}}">
+                        <input type="hidden" required name="nama_siswa" value="{{data.nama_lengkap}}">
+                        <input type="hidden" required name="kelas" value="{{data.kelas}}">
+                        <input type="hidden" required name="jurusan" value="{{data.jurusan}}">
+                        {% endfor %}
+                      <div class="row">
+                        <!-- accepted payments column -->
+                        <div class="col-xs-3">
+                          <p class="lead">Pembayaran:</p>
+                          <div class="text-muted well well-sm no-shadow" style="margin-top: 10px;">
+                            <label>Jenis Pembayaran</label>                            
+                            <ol type="1">
+                              {% for jenis in select_jenis %}
+                              <li>
+                                <input name="nominal_bayar" value="{{jenis.nominal}}" type="checkbox" id="jenis_pembayaran" onclick="totalIt()" class="1"/> 
+                                <input type="checkbox" name="jenis_pembayaran" value="{{jenis.jenis_pembayaran}}"> {{jenis.jenis_pembayaran}}
+                              </li>
+                              {% endfor %}
+                            </ol>
+
+                          </div>
+                        </div>
+                        <div class="col-xs-4">
+                          <p class="lead">:</p>
+                          <div class="text-muted well well-sm no-shadow" style="margin-top: 10px;">
+                            <label>Bayar Nominal :</label>
+                            <input type="text" name="nominal" id="nominal" onkeyup="sum();"  placeholder="0" class="form-control" required>
+                          </div>
+                        </div>
+                        <!-- /.col -->
+                        <div class="col-xs-5">
+                          <p class="lead">:</p>
+                          <div class="table-responsive">
+                            <table class="table">
+                              <tbody>
+                                <tr>
+                                  <th style="width:50%">Subtotal:</th>
+                                  <td><input type="text" name="total" id="total" class="form-control" placeholder="0" readonly></td>
+                                </tr>
+                                <tr>
+                                  <th style="width:50%">Tanggungan:</th>
+                                  <td><input type="text" name="jumlah_tanggungan" id="jumlah_tanggungan" onkeyup="sum();"  class="form-control" placeholder="0" readonly></td>
+                                </tr>
+                                <tr>
+                                  <th>Semester :</th>
+                                  <td>
+                                    <select class="form-control" name="semester" required>
+                                      <option value="">Pilih</option>
+                                      <option>Semester 1</option>
+                                      <option>Semester 2</option>
+                                      <option>Semester 3</option>
+                                      <option>Semester 4</option>
+                                    </select>
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <th>Thn Akademik :</th>
+                                  <td><input type="text" required class="form-control" name="tahun_akademik" value="{{tahun_sekarang}}"></td>
+                                </tr>
+                              </tbody>
+                            </table>
+                            <a href="{% url 'Pembayaran' %}" class="btn btn-danger pull-right">
+                            <i class="fa fa-close"></i> Cancel</a>
+                          <button type="submit" class="btn btn-primary pull-right" style="margin-right: 5px;"><i class="fa fa-download"></i> Submit</button>
+                          </div>
+
+                        </div>
+                        <!-- /.col -->
+                      </div>
+                    </form>
+{% include "Master_pembayaran/head_bawah.html" %}

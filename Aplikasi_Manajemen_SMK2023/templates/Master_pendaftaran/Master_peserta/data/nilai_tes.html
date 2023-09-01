@@ -1,0 +1,78 @@
+{% include "Master_pendaftaran/Master_peserta/style_atas.html" %}
+<div class="main-panel">        
+    <div class="content-wrapper">
+        <div class="row">
+                {% for log in login %}
+                
+                  <div class="col-md-6 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title">Profil Peserta Didik Baru</h4>
+                  
+                  <div class="row">
+                    <div class="col-md-6">
+                      <address>
+                        <p class="fw-bold">Nama Lengkap</p>
+                        <p>
+                          Alamat
+                        </p>
+                        <p>
+                           Jenis Kelamin
+                        </p>
+                        <p>
+                          No-Hp
+                        </p>
+                      </address>
+                    </div>
+                    <div class="col-md-6">
+                      <address class="text-primary">
+                        <p class="fw-bold">
+                          {{log.nama_lengkap}}
+                        </p>
+                        <p class="mb-2">
+                          {{log.alamat}}
+                        </p>
+                        <p class="fw-bold">
+                          {{log.jk}}
+                        </p>
+                        <p>
+                          {{log.nohp}}
+                        </p>
+                      </address>
+                    </div>
+                <img src="/static/icon/8.png">
+                <div class="card-body">                  
+                  <div class="card-body">
+                    <h4 class="card-title">Info Nilai Tes Soal</h4>
+                    {% for check in check_data %}
+                    {% if log.no_ktp == check.no_ktp %}
+                  <blockquote class="blockquote blockquote-primary">
+                    <p>Hasil tes ujian online (PPDB) anda ialah.</p><br>
+                    <footer class="blockquote-footer">Tes Ujian (PPDB) : <b>{{check.rata_nilai}}</b>
+                      {% if check.rata_nilai >= '90' %}
+                      <b>Sangat Baik (Lulus)</b>
+                      {% elif check.rata_nilai >= '80' %}                      
+                      <b>Cukup Baik (Lulus)</b>
+                      {% elif check.rata_nilai >= '70' %}
+                      <b>Baik (Lulus)</b>
+                      {% elif check.rata_nilai == '70' %}
+                      <b>Kurang Baik (Lulus)</b>
+                      {% elif check.rata_nilai <= '70' %}
+                      <b>Buruk  (Lulus)</b>
+                      {% endif %}
+                    </footer>
+                  </blockquote>                  
+                  {% endif %}
+                  {% endfor %}
+                </div>
+                </div>
+              </div>
+            </div>
+                  
+                  </div></div>
+                  {% endfor %}
+                
+    </div>
+</div>
+
+{% include "Master_pendaftaran/Master_peserta/style_bawah.html" %}

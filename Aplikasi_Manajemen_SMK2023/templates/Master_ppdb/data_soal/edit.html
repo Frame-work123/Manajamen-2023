@@ -1,0 +1,99 @@
+{% include "Master_ppdb/head_atas.html" %}
+<div class="row">
+              <div class="col-md-12 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2><i class="fa fa-files-o"></i> <b>EDIT DATA SOAL (PPDB)</b></h2>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+                    <br />
+                    <form class="form-horizontal form-label-left" enctype="multipart/form-data" method="post">
+                    {% csrf_token %}
+                     <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Pilih Mata Pelajaran </label>
+                        <div class="col-md-9 col-sm-9 col-xs-12">
+                          <select class="form-control" name="nama_mapel" required>
+                            <option>{{edit_soal.nama_mapel}}</option>
+                            <option value="">Select</option>
+                            {% for select in select_mapel %}
+                            <option>{{select.nama_mapel}}</option>
+                            {% endfor %}
+                          </select>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Soal Tes</label>
+                        <div class="col-md-9 col-sm-9 col-xs-12">
+                          <textarea class="form-control" name="soal_mapel" required placeholder="Enter Soal Tes">{{edit_soal.soal_mapel}}</textarea>
+                        </div>
+                      </div>
+                       <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Jawaban A</label>
+                        <div class="col-md-9 col-sm-9 col-xs-12">
+                          <textarea class="form-control" name="a" required placeholder="Enter Jawaban A">{{edit_soal.a}}</textarea>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Jawaban B</label>
+                        <div class="col-md-9 col-sm-9 col-xs-12">
+                          <textarea class="form-control" name="b" required placeholder="Enter Jawaban B">{{edit_soal.b}}</textarea>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Jawaban C</label>
+                        <div class="col-md-9 col-sm-9 col-xs-12">
+                          <textarea class="form-control" name="c" required placeholder="Enter Jawaban C">{{edit_soal.c}}</textarea>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Jawaban D</label>
+                        <div class="col-md-9 col-sm-9 col-xs-12">
+                          <textarea class="form-control" name="d" required placeholder="Enter Jawaban D">{{edit_soal.d}}</textarea>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Kunci Jawaban </label>
+                        <div class="col-md-9 col-sm-9 col-xs-12">
+                          <select class="form-control" name="kunci_jawaban" required>
+                            <option>{{edit_soal.kunci_jawaban}}</option>
+                            <option value="">Select</option>
+                            <option>A</option>
+                            <option>B</option>
+                            <option>C</option>
+                            <option>D</option>
+                          </select>
+                        </div>
+                      </div>
+                       <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Nilai Soal </label>
+                        <div class="col-md-9 col-sm-9 col-xs-12">
+                          <input type="text" class="form-control" placeholder="Enter Nilai Soal" required name="nilai_mapel" value="{{edit_soal.nilai_mapel}}">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Tanggal Tes </label>
+                        <div class="col-md-9 col-sm-9 col-xs-12">
+                          <input type="date" class="form-control" required name="tanggal_tes" value="{{edit_soal.tanggal_tes}}">
+                        </div>
+                      </div>
+                      <div class="ln_solid"></div>
+                      <div class="form-group">
+                        <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-3">
+                          <button type="submit" class="btn btn-success">
+                            <i class="fa fa-save"></i> Submit</button>
+                          <button class="btn btn-warning" type="reset">
+                            <i class="fa fa-refresh"></i> Reset</button>
+                          <a href="{% url 'Soal_ppdb' %}" class="btn btn-danger">
+                            <i class="fa fa-close"></i> Cancel</a>
+                        </div>
+                      </div>
+
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+            </div>
+            </div>
+{% include "Master_ppdb/head_bawah.html" %}

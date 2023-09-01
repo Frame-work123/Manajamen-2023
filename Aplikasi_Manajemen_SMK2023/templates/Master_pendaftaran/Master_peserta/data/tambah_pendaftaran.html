@@ -1,0 +1,141 @@
+{% include "Master_pendaftaran/Master_peserta/style_atas.html" %}
+<div class="main-panel">        
+    <div class="content-wrapper">
+        <div class="row">
+        	{% if messages %}
+				{% for info in messages %}
+				<div class="alert alert-warning mt-4" role="alert">
+				<i class="ti-info-alt-outline"></i>Info.. <strong>{{info}}</strong>
+				</div>
+				{% endfor %}
+				{% endif %}
+        	<div class="col-md-9 grid-margin stretch-card">
+
+              <div class="card">
+                <div class="card-body">
+
+                
+                {% for log in login %}
+                
+                  <h4 class="card-title">FORMULIR PENDAFTARAN (PPDB)</h4>
+                  <p class="card-description">
+                    Lengkapi Data Peserta Baru Sebagai Persyaratan Calon Didik Baru.
+                  </p>
+                  
+                  <form class="forms-sample" method="post" enctype="multipart/form-data">
+                  	{% csrf_token %}
+                    <div class="form-group row">
+                      <label for="exampleInputUsername2" class="col-sm-3 col-form-label">Nomor Kartu Keluarga (KK)</label>
+                      <div class="col-sm-9">
+                        <input type="text" class="form-control" id="exampleInputUsername2" placeholder="Nomor KK" maxlength="16" name="no_kk" required>
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label for="exampleInputEmail2" class="col-sm-3 col-form-label">No-KTP</label>
+                      <div class="col-sm-9">
+                        <input type="text" class="form-control" id="exampleInputEmail2" placeholder="Nomor KTP Peserta" name="no_ktp" required value="{{log.no_ktp}}">
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label for="exampleInputMobile" class="col-sm-3 col-form-label">Nama Lengkap</label>
+                      <div class="col-sm-9">
+                        <input type="text" class="form-control" id="exampleInputMobile" placeholder="Nama Lengkap" name="nama_lengkap" required value="{{log.nama_lengkap}}">
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label for="exampleInputPassword2" class="col-sm-3 col-form-label">Alamat Lengkap</label>
+                      <div class="col-sm-9">
+                        <input type="text" class="form-control" id="exampleInputPassword2" placeholder="Alamat Lengkap" name="alamat" required value="{{log.alamat}}">
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label for="exampleInputConfirmPassword2" class="col-sm-3 col-form-label">Jenis Kelamin</label>
+                      <div class="col-sm-9">
+       <input type="radio" class="flat" name="jk" id="genderM" value="Laki-Laki" required {% if log.jk == "Laki-Laki" %}checked="checked"{% endif %}/> Laki-Laki <br>
+      <input type="radio" class="flat" name="jk" id="genderF" value="Perempuan"  {% if log.jk == "Perempuan" %}checked="checked"{% endif %}/> Perempuan
+                      </div>
+                    </div>
+                   <div class="form-group row">
+                      <label for="exampleInputPassword2" class="col-sm-3 col-form-label">Tempat Lahir</label>
+                      <div class="col-sm-9">
+                        <input type="text" class="form-control" id="exampleInputPassword2" placeholder="Tempat Lahir" name="tempat_lahir" required>
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label for="exampleInputPassword2" class="col-sm-3 col-form-label">Tanggal Lahir</label>
+                      <div class="col-sm-9">
+                        <input type="date" class="form-control" id="exampleInputPassword2" name="tanggal_lahir" required>
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label for="exampleInputPassword2" class="col-sm-3 col-form-label">Nomor HP</label>
+                      <div class="col-sm-9">
+                        <input type="text" class="form-control" id="exampleInputPassword2" placeholder="Nomor HP" name="nohp" required maxlength="12" value="{{log.nohp}}">
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label for="exampleInputPassword2" class="col-sm-3 col-form-label">E-mail</label>
+                      <div class="col-sm-9">
+                        <input type="email" class="form-control" id="exampleInputPassword2" placeholder="E-mail" name="email" required>
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label for="exampleInputPassword2" class="col-sm-3 col-form-label">Pendidikan Akhir / Asal Sekolah</label>
+                      <div class="col-sm-9">
+                        <input type="text" class="form-control" id="exampleInputPassword2" placeholder="Enter Pendidikan Akhir" name="pendidikan_akhir" required>
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label for="exampleInputPassword2" class="col-sm-3 col-form-label">Nama Ibu</label>
+                      <div class="col-sm-9">
+                        <input type="text" class="form-control" id="exampleInputPassword2" placeholder="Nama Ibu" name="nama_ibu" required>
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label for="exampleInputPassword2" class="col-sm-3 col-form-label">Nama Ayah</label>
+                      <div class="col-sm-9">
+                        <input type="text" class="form-control" id="exampleInputPassword2" placeholder="Nama Ayah" name="nama_ayah" required>
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label for="exampleInputPassword2" class="col-sm-3 col-form-label">Pekerjaan Ibu</label>
+                      <div class="col-sm-9">
+                        <input type="text" class="form-control" id="exampleInputPassword2" placeholder="Pekerjaan Ibu" name="pekerjaan_ibu" required>
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label for="exampleInputPassword2" class="col-sm-3 col-form-label">Pekerjaan Ayah</label>
+                      <div class="col-sm-9">
+                        <input type="text" class="form-control" id="exampleInputPassword2" placeholder="Pekerjaan Ayah" name="pekerjaan_ayah" required>
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label for="exampleInputPassword2" class="col-sm-3 col-form-label">Upload Foto Peserta</label>
+                      <div class="col-sm-9">
+                        <input type="file" class="form-control" id="exampleInputPassword2" name="foto" required>
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label for="exampleInputPassword2" class="col-sm-3 col-form-label">Pilih Jurusan Anda</label>
+                      <div class="col-sm-9">
+                        <select class="form-control" name="nama_jurusan" required>
+                        	<option value="">Pilih Jurusan</option>
+                        	{% for j in select_jurusan %}
+                        	<option>{{j.nama_jurusan}}</option>
+                        	{% endfor %}
+                        </select>
+                      </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary me-2">Submit</button>
+                    <a href="{% url 'halaman_login' %}" class="btn btn-light">Cancel</a>
+                  </form>
+                  
+                  
+                  {% endfor %}
+                </div>
+              </div>
+       	</div>
+    </div>
+</div>
+
+{% include "Master_pendaftaran/Master_peserta/style_bawah.html" %}

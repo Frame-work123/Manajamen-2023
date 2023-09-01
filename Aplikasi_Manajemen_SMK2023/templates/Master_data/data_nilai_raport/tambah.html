@@ -1,0 +1,224 @@
+{% include "head_atas.html" %}
+ <script type="text/javascript">
+  function sum(){
+    var nilai_pengetahuan=document.getElementById('nilai_pengetahuan').value;
+    var nilai_keterampilan=document.getElementById('nilai_keterampilan').value;    
+    var result =(parseInt(nilai_pengetahuan) + parseInt(nilai_keterampilan));
+    // 
+    if (!isNaN(result)){
+      document.getElementById('jumlah_nilai').value = result;
+    }
+    var jumlah_nilai=document.getElementById('jumlah_nilai').value;    
+    var result =(parseInt(jumlah_nilai)/2);
+    if (!isNaN(result)){
+      document.getElementById('rata_rata').value = result;
+    }
+  }
+</script>
+
+ <div class="row">
+              <div class="col-md-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2><b>PROSES PENILAIAN MATA PELAJARAN</b></h2>
+                    
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+
+                    <section class="content invoice">
+                      <!-- title row -->
+                      <div class="row">
+                        <div class="col-xs-12 invoice-header">
+                          <h1>
+                          <i class="fa fa-child"></i> NILAI SMK
+                          <div class="pull-right">
+                            <div class="title_right">
+                <form method="get">
+                <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+                  <div class="input-group">                    
+                    <input type="text" class="form-control" placeholder="Search NIS..." name="cari_data">
+                    <span class="input-group-btn">
+                      <button class="btn btn-default" type="submit">Go!</button>
+                    </span>                  
+                  </div>
+                </div>
+                </form>
+              </div>
+                          </div>
+                          </h1>
+                        </div>
+                        <!-- /.col -->
+                      </div>
+                      <!-- info row -->
+                      {% for tampil in tampil_siswa %}
+                      <div class="row invoice-info">
+                        <div class="x_panel">
+                        <div class="col-sm-4 invoice-col">                          
+                          <b><i class="fa fa-user"></i> Identitas Siswa</b>
+                          <address>                            
+                            <table class="table">
+                              <tr>
+                                <td><img src="{{ tampil.foto.url }}" style="width: 50px"></td>
+                                <td>
+                                  <table class="table-striped table">
+                                    <tr>
+                                      <td>Nama Lengkap : <strong>{{tampil.nama_lengkap}}</strong></td>
+                                    </tr>
+                                    <tr>
+                                      <td>Jenis Kelamin : <strong>{{tampil.jk}}</strong></td>
+                                    </tr>
+                                    <tr>
+                                      <td>Alamat : <strong>{{tampil.alamat}}</strong></td>
+                                    </tr>
+                                    <tr>
+                                      <td>Tanggal Lahir : <strong>{{tampil.tanggal_lahir}}</strong></td>
+                                    </tr>
+                                  </table>  
+                                  </td>                                
+                              </tr>
+                              
+                            </table>
+                          </address>
+                        </div>
+                        <!-- /.col -->
+                        <div class="col-sm-4 invoice-col">
+                          <b><i class="fa fa-bullhorn"></i> Jurusan</b><br>
+                          <address>
+                            <br>
+                              <strong style="font-size: 19px" class="label label-default">{{tampil.jurusan}}</strong>
+                            </address>
+                        </div>
+                        <!-- /.col -->
+                        <div class="col-sm-4 invoice-col">
+                          <b><i class="fa fa-building"></i> Kelas</b><br>
+                          <address><br>
+                          <strong style="font-size: 19px" class="label label-default">{{tampil.kelas}}</strong>
+                        </address>
+                        </div>
+                        <!-- /.col -->
+                      </div>
+                      </div>
+                      {% endfor %}
+                      <!-- /.row -->
+
+                      <!-- Table row -->
+                      <form method="post">
+                        {% csrf_token %}
+                      <div class="row">
+                        <div class="col-xs-12 table">                          
+                          <table class="table table-striped">
+                            <thead>
+                              <tr style="background-color: #2e5b84; color: white;">
+                                <th>No Induk Siswa</th>
+                                <th>Nilai Pengetahuan</th>
+                                <th>Deskrpsi Pengetahuan</th>
+                                <th>Nilai Keterampilan</th>
+                                <th>Deskripsi Keterampilan</th>
+                                <th>Nilai (KKM)</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              {% for tampil in tampil_siswa %}
+                              <tr>                                
+                                  <input type="hidden" name="nama_siswa" value="{{tampil.nama_lengkap}}">
+                                  <input type="hidden" name="nama_kelas" value="{{tampil.kelas}}">
+                                  <input type="hidden" name="nama_jurusan" value="{{tampil.jurusan}}">
+                                
+                                <td><input type="text" class="form-control" name="no_induk" placeholder="Enter No Induk" required maxlength="11">
+                                </td>
+                                <td><input type="text" class="form-control" name="nilai_pengetahuan" placeholder="Enter Nilai Pengetahun" required id="nilai_pengetahuan" onkeyup="sum();">
+                                </td>
+                                <td>
+                                  <textarea class="form-control" name="deskripsi_pengetahuan" placeholder="Deskrpsi">Siswa Dapat menerapkan fungsi sosial, struktur teks, dan unsur kebahasaan teks transaksional lisan dan tulis yang melibatkan tindakan memberi dan meminta informasi terkait jati diri.</textarea>
+                                </td>
+                                <td><input type="text" class="form-control" name="nilai_keterampilan" placeholder="Enter Nilai Keterampilan" required id="nilai_keterampilan" onkeyup="sum();">
+                                </td>
+                                <td>
+                                  <textarea class="form-control" name="deskripsi_keterampilan" placeholder="Deskrpsi">Siswa Dapat menginterpretasi isi teks laporan hasil observasi berdasarkan intrepretasi baik secara lisan maupun tulisan, mengonstrukturkan teks laporan hasil observasi dengan.</textarea>
+                                </td>
+                                <td><input type="text" class="form-control" name="nilai_kkm" value="75" required style="width: 50px">
+                                </td>
+                              </tr>
+                              {% endfor %}
+                            </tbody>
+                          </table>
+                        </div>
+                        <!-- /.col -->
+                      </div>
+                      <!-- /.row -->
+
+                      <div class="row">
+                        <!-- accepted payments column -->
+                        <div class="col-xs-6">
+                          <p class="lead">Identitas Mata Pelajaran:</p>
+                          <div class="text-muted well well-sm no-shadow" style="margin-top: 10px;">
+                             Proses penilaian siswa SMK kelas X,XI dan XII dengan jurusan ditempuh oleh para siswa dan siswi.
+                            <table class="table">
+                              {% for tampil in data_kelompok %}
+                              <tr>
+                                <td style="width: 15%">
+                                  <label>
+                                    <input type="checkbox" class="flat" name="kelompok_mapel" value="{{tampil.kelompok_mapel}}" > {{tampil.kelompok_mapel}}
+                                  </label>
+                                </td>
+                                <td>
+                                  <table>
+                                    {% for tampil_data in kelompok_A %}
+                                    {% if tampil.kelompok_mapel == tampil_data.kelompok_mapel %}
+                                    <tr>
+                                      <td>
+                                        <input type="radio" class="flat" name="nama_mapel" id="genderM" value="{{tampil_data.nama_mapel}}" /> {{tampil_data.nama_mapel}} <br>
+                                      </td>
+                                    </tr>
+                                    {% endif %}
+                                    {% endfor %}
+                                  </table>
+                                </td>
+                              </tr>
+                              {% endfor %}
+                            </table>
+                           
+                          </div>
+                        </div>
+                        <!-- /.col -->
+                        <div class="col-xs-6">
+                          <p class="lead">Keterangan Penilaian :</p>
+                          <div class="table-responsive">
+                            <table class="table">
+                              <tbody>
+                                <tr>
+                                  <th style="width:50%">Jumlah Nilai:</th>
+                                  <td>
+                                    <input type="text" name="jumlah_nilai" class="form-control" placeholder="...." readonly id="jumlah_nilai" onkeyup="sum();"></td>
+                                </tr>
+                                <tr>
+                                  <th>Rata-Rata:</th>
+                                  <td>
+                                    <input type="text" name="rata_rata" class="form-control" placeholder="...." readonly id="rata_rata" onkeyup="sum();"></td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                        <!-- /.col -->
+                      </div>
+                    <!-- this row will not appear when printing -->
+                      <div class="row no-print">
+                        <div class="col-xs-12">
+                          <!-- <button class="btn btn-default" onclick="window.print();"><i class="fa fa-print"></i> Print</button> -->
+                          
+                          <a href="{% url 'Nilai' %}" class="btn btn-danger pull-right">
+                            <i class="fa fa-close"></i> Cancel</a>
+                          <button class="btn btn-primary pull-right" style="margin-right: 5px;"><i class="fa fa-download"></i> Submit</button>
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </div>
+              </form>
+              </div>
+            </div>
+          </div>
+        </div>
+{% include "head_bawah.html" %}

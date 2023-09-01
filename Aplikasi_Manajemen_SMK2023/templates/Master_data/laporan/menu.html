@@ -1,0 +1,152 @@
+{% include "head_atas.html" %}
+<div class="row">
+	 <div class="col-md-9 col-sm-6 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2><i class="fa fa-bars"></i> MENU LAPORAN MANAJEMEN</h2>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+
+                    <div class="col-xs-3">
+                      <!-- required for floating -->
+                      <!-- Nav tabs -->
+                      <ul class="nav nav-tabs tabs-left">
+                        <li class="active"><a href="#home" data-toggle="tab"><i class="fa fa-download"></i> Laporan</a>
+                        </li>
+                        <li><a href="#lp_siswa" data-toggle="tab"><i class="fa fa-files-o"></i> Laporan Siswa</a>
+                        </li>
+                        <li><a href="#lp_guru" data-toggle="tab"><i class="fa fa-files-o"></i> Laporan Guru</a>
+                        </li>
+                        <li><a href="#lp_nilai" data-toggle="tab"><i class="fa fa-files-o"></i> Laporan Nilai</a>
+                        </li>
+                        <li><a href="#lp_mapel" data-toggle="tab"><i class="fa fa-files-o"></i> Laporan Mapel</a>
+                        </li>
+                      </ul>
+                    </div>
+
+                    <div class="col-xs-9">
+                      <!-- Tab panes -->
+                      <div class="tab-content">
+                        <div class="tab-pane active" id="home">
+                          <p class="lead"><b>Laporan</b></p>
+                          <p align="justify">Lakukan proses pembuatan laporan tentang manajemen sekolah dengan memilih fitur menu di halaman ini. Dan lakukan sesuai dengan kebutuhan manajemen.</p>
+                        </div>
+                        <div class="tab-pane" id="lp_siswa">
+                        	<p class="lead"><b>Laporan Data Siswa</b></p>
+                        	<form method="get" action="{% url 'Lp_siswa' %}" id="demo-form" target="_blank">
+                        	<div class="x_panel">
+                        		<label for="fullname">Jurusan * :</label>
+                    			<select class="form-control" id="fullname" required name="cari_jurusan">
+                    				<option value="">--Select--</option>
+                            {% for j in select_jurusan %}
+                            <option>{{j.nama_jurusan}}</option>
+                            {% endfor %}
+                    			</select>
+                    			<label for="fullname">Kelas * :</label>
+                    			<select class="form-control" id="fullname" required name="cari_kelas">
+                    				<option value="">--Select--</option>
+                            <option>X</option>
+                            <option>XI</option>
+                            <option>XII</option>
+                    			</select>
+                          <label for="fullname">Tahun Masuk * :</label>
+                          <select class="form-control" id="fullname" required name="cari_tahun" required="">
+                            <option value="">Pilih Tahun</option>
+                            <option>2023</option>
+                            <option>2022</option>
+                            <option>2021</option>
+                            <option>2019</option>
+                            <option>2018</option>
+                            <option>2017</option>
+                            <option>2016</option>
+                            <option>2015</option>
+                          </select>
+                    			<br>
+                    			 <hr>
+                    			<button class="btn btn-primary pull-right" style="margin-right: 5px;"><i class="fa fa-print"></i> Cetak Laporan</button>
+                        		</div>
+                        	</form>
+                        </div>
+                        <div class="tab-pane" id="lp_guru">
+                          <p class="lead"><b>Laporan Data Guru</b></p>
+                          <form method="get" action="{% url 'Lp_guru' %}" id="demo-form" target="_blank">
+                          <div class="x_panel">
+                          <label for="fullname">Pilih Data * :</label>
+                          <select class="form-control" id="fullname" required name="cari_jabatan">
+                            <option value="">--Select--</option>
+                            <option>Kepala Sekolah</option>
+                            <option>Waka Kurikulum</option>
+                            <option>Waka Kesiswaan</option>
+                            <option>Waka Sarpas</option>
+                            <option>Kepala Tata Usaha</option>
+                            <option>Bendahara</option>
+                            <option>Guru</option>
+                            <option>Wali Kelas</option>
+                            <option>Guru Tahfidz</option>
+                          </select>
+                          <br>
+                           <hr>
+                          <button class="btn btn-primary pull-right" style="margin-right: 5px;"><i class="fa fa-print"></i> Cetak Laporan</button>
+                            </div>
+                          </form>
+                        </div>
+                        <div class="tab-pane" id="lp_nilai">
+                          <p class="lead"><b>Laporan Data Nilai</b></p>
+                          <form method="get" action="{% url 'Lp_nilai' %}" id="demo-form" target="_blank">
+                          <div class="x_panel">
+                            <label for="fullname">Jurusan * :</label>
+                          <select class="form-control" id="fullname" required name="cari_jurusan">
+                            <option value="">--Select--</option>
+                            {% for j in select_jurusan %}
+                            <option>{{j.nama_jurusan}}</option>
+                            {% endfor %}
+                          </select>
+                          <label for="fullname">Kelas * :</label>
+                          <select class="form-control" id="fullname" required name="cari_kelas">
+                            <option value="">--Select--</option>
+                            <option>X</option>
+                            <option>XI</option>
+                            <option>XII</option>
+                          </select>
+                          <label for="fullname">No Induk * :</label>
+                          <input type="text" class="form-control" name="cari_noinduk" data-parsley-trigger="change" required />
+                          <br>
+                           <hr>
+                          <button class="btn btn-primary pull-right" style="margin-right: 5px;"><i class="fa fa-print"></i> Cetak Laporan</button>
+                            </div>
+                          </form>
+                        </div>
+                        <div class="tab-pane" id="lp_mapel">
+                          <p class="lead"><b>Laporan Data Mata Pelajaran</b></p>
+                          <form method="get" action="{% url 'Lp_mapel' %}" id="demo-form" target="_blank">
+                          <div class="x_panel">
+                            <label for="fullname">Pilih Data * :</label>
+                          <select class="form-control" id="fullname" required name="cari_kelompok">
+                            <option value="">--Select--</option>                            
+                                     <option>A</option>
+                                    <option>B</option>
+                                    <option>C</option>
+                                    <option>D</option>
+                                    <option>E</option>
+                                    <option>G</option>
+                                    <option>H</option>
+                                    <option>Mulok</option>                            
+                          </select>                         
+                          <br>
+                           <hr>
+                          <button class="btn btn-primary pull-right" style="margin-right: 5px;"><i class="fa fa-print"></i> Cetak Laporan</button>
+                            </div>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="clearfix"></div>
+
+                  </div>
+                </div>
+              </div>
+</div>
+</div></div></div>
+{% include "head_bawah.html" %}

@@ -1,0 +1,103 @@
+{% include "head_atas.html" %}
+{% if messages %}
+{% for info in messages %}
+ <div class="alert alert-success alert-dismissible fade in" role="alert">
+<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+  <span aria-hidden="true">×</span>
+</button>
+<strong>{{info}}</strong>
+</div>
+{% endfor %}
+{% endif %}
+<div class="row">
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2><i class="fa fa-navicon"></i> <b>FORM DATA SISWA</b></h2>
+                    <ul class="nav navbar-right panel_toolbox">                      
+                      <li>
+                        <form method="get">
+                          <select class="form-control" name="cari_data" required onchange="this.form.submit()">
+                            <option value="">Pilih Kelas</option>
+                            {% for kls in select_kelas %}
+                            <option>{{kls.nama_kelas}}</option>
+                            {% endfor %}
+                          </select>
+                        </form>
+                      </li>
+                      <li>
+                        <form method="get">
+                          <select class="form-control" name="cari_tahun" required onchange="this.form.submit()">
+                            <option value="">Pilih Tahun</option>
+                            <option>2023</option>
+                            <option>2022</option>
+                            <option>2021</option>
+                            <option>2020</option>
+                            <option>2019</option>
+                            <option>2018</option>
+                            <option>2017</option>
+                            <option>2016</option>
+                            <option>2015</option>
+                          </select>
+                        </form>
+                      </li>
+                      <li>
+                        <a class="btn btn-round btn-success" style="color: white;" href="{% url 'Tambah_siswa' %}">
+                        <i class="fa fa-plus"></i> Tambah Data</a>
+                      </li>
+                    </ul>
+
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+                    <table id="datatable-buttons" class="table table-striped table-bordered">
+                      <thead>
+                        <tr>
+                          <th>No</th>
+                          <th>NIS</th>
+                          <th>Nama Lengkap</th>
+                          <th>JK</th>
+                          <th>Alamat</th>
+                          <th>Tempat Lahir</th>
+                          <th>Tanggal Lahir</th>
+                          <th>No-Hp</th>
+                          <th>Jurusan</th>
+                          <th>Kelas</th>
+                          <th>Foto</th>
+                          <th>Proses</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {% for tampil in data_siswa %}
+                        <tr>
+                        <td>{{forloop.counter}}</td>
+                        <td>{{tampil.nis}}</td>
+                        <td>{{tampil.nama_lengkap}}</td>
+                        <td>{{tampil.jk}}</td>
+                        <td>{{tampil.alamat}}</td>
+                        <td>{{tampil.tempat_lahir}}</td>
+                        <td>{{tampil.tanggal_lahir}}</td>
+                        <td>{{tampil.nohp}}</td>
+                        <td>{{tampil.jurusan}}</td>
+                        <td>{{tampil.kelas}}</td>
+                        <td>
+                        <a href="{{ tampil.foto.url }}" target="_blank">
+                          <img src="{{ tampil.foto.url }}" style="width: 50px"></a>
+                          <a href="{% url 'edit_foto_siswa' tampil.id %}" onclick="return confirm('Apakah Anda Yakin Ingin Mengubah Foto')">
+                        <i class="ace-icon fa fa-pencil bigger-130"></i> Edit Foto
+                        </a>
+                        </td>
+                        <td>
+                        <a href="{% url 'edit_siswa' tampil.id %}" class="btn btn-xs btn-info" onclick="return confirm('Apakah Anda Yakin Ingin Mengedit Data')"><i class="fa fa-edit"></i> Edit</a>
+                    <!-- -------------------- -->
+                        <a href="{% url 'hapus_siswa' tampil.id %}" class="btn btn-xs btn-danger" onclick="return confirm('Apakah Anda Yakin Ingin Menghapus Data')"><i class="fa fa-trash-o"></i> Hapus</a>
+                        </td>
+                        </tr>   
+                        {% endfor %}           
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+    {% include "head_bawah.html" %}

@@ -1,0 +1,58 @@
+{% include "Master_ppdb/head_atas.html" %}
+{% if messages %}
+{% for info in messages %}
+ <div class="alert alert-success alert-dismissible fade in" role="alert">
+<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+  <span aria-hidden="true">×</span>
+</button>
+<strong>{{info}}</strong>
+</div>
+{% endfor %}
+{% endif %}
+<div class="row">
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2><i class="fa fa-navicon"></i> <b>FORM DATA REGISTRASI (PPDB)</b></h2>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+                    <table id="datatable-buttons" class="table table-striped table-bordered">
+                      <thead>
+                        <tr>
+                          <th>No</th>
+                          <th>No KTP</th>
+                          <th>Nama Lengkap</th>
+                          <th>Alamat</th>
+                          <th>Jenis Kelamin</th>
+                          <th>No Hp</th>
+                          <th>Username</th>
+                          <th>Password</th>
+                          <th>Proses</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {% for tampil in data_register %}
+                        <tr>
+                        <td>{{forloop.counter}}</td>
+                        <td>{{tampil.no_ktp}}</td>
+                        <td>{{tampil.nama_lengkap}}</td>
+                        <td>{{tampil.alamat}}</td>
+                        <td>{{tampil.jk}}</td>
+                        <td>{{tampil.nohp}}</td>
+                        <td>{{tampil.username}}</td>
+                        <td>{{tampil.password}}</td>
+                        <td>
+                        <a href="{% url 'edit_check_daftar' tampil.id %}" class="btn btn-xs btn-info" onclick="return confirm('Apakah Anda Yakin Ingin Mengedit Data')"><i class="fa fa-edit"></i> Edit</a>
+                    <!-- -------------------- -->
+                        <a href="{% url 'hapus_check_daftar' tampil.id %}" class="btn btn-xs btn-danger" onclick="return confirm('Apakah Anda Yakin Ingin Menghapus Data')"><i class="fa fa-trash-o"></i> Hapus</a>
+                        </td>
+                        </tr>   
+                        {% endfor %}           
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+    {% include "Master_ppdb/head_bawah.html" %}

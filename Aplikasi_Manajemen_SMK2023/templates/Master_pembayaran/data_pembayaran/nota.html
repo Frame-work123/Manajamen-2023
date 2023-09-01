@@ -1,0 +1,73 @@
+<!<html>
+<head>
+  <title>LAPORAN</title>
+</head>
+<body>
+<link href="/static/print/style.css" rel="stylesheet" type="text/css" />
+
+<style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+ 
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 10px;
+        }
+        th {
+            background-color: rgb(19, 110, 170);
+            color: white;
+        }
+        tr:hover {background-color: #f5f5f5;}
+</style>
+<div id="container">
+  <h1 align="center">
+    <strong style="font-family:'Times New Roman', Times, serif">
+  NOTA TRANSAKSI PEMBAYARAN SMK</strong>
+  <p style="font-size: 12px;">SMK INSAN TERPADU, KEC. PAITON, KAB.PROBOLINGGO</p>
+  <p style="font-size: 19px">Akademik : {{tampil.tahun_akademik}}</p>
+</h1>
+  <div id="body">
+                    <table>
+                      <thead>
+                        <tr>
+                          <th>No</th>
+                          <th>Jenis Pembayaran</th>
+                          <th>NIS</th>
+                          <th>Nama</th>
+                          <th>Kelas</th>
+                          <th>Jurusan</th>
+                          <th>Nominal Pembayaran</th>
+                          <th>Jumlah Tanggungan</th>
+                          <th>Semester</th>                          
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                        <td>{{forloop.counter}}</td>
+                        <td>{{tampil.jenis_pembayaran}}</td>
+                        <td>{{tampil.nis}}</td>
+                        <td>{{tampil.nama_siswa}}</td>
+                        <td>{{tampil.kelas}}</td>
+                        <td>{{tampil.jurusan}}</td>
+                        <td><small>Rp.</small><label class="uang">{{tampil.nominal}}</label></td>
+                        <td><small>Rp.</small><label class="uang">{{tampil.jumlah_tanggungan}}</label></td>
+                        <td>{{tampil.semester}}</td>                        
+                        </tr>   
+                      </tbody>
+                    </table>
+                     <div align="right">
+                      <h2>TTD, {{tanggal_sekarang}}</h2><br><br><br><br>
+                      <h2>(.........................)</h2>
+                    </div>
+                  </div>
+</div>
+</div>
+<script src="/static/format_rp_css/jqurey_format.js"></script>
+<script src="/static/format_rp_css/jquery.mask.min.js"></script>
+<script src="/static/format_rp_css/js_format.js"></script>
+</body>
+</html>

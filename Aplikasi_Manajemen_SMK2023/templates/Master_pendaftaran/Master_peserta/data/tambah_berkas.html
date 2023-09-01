@@ -1,0 +1,71 @@
+{% include "Master_pendaftaran/Master_peserta/style_atas.html" %}
+<div class="main-panel">        
+    <div class="content-wrapper">
+        <div class="row">
+          {% if messages %}
+        {% for info in messages %}
+        <div class="alert alert-warning mt-4" role="alert">
+        <i class="ti-info-alt-outline"></i>Info.. <strong>{{info}}</strong>
+        </div>
+        {% endfor %}
+        {% endif %}
+          <div class="col-md-9 grid-margin stretch-card">
+
+              <div class="card">
+                <div class="card-body">
+
+                
+                {% for log in login %}
+                
+                  <h4 class="card-title">FORMULIR PERSYARATAN PENDAFTARAN (PPDB)</h4>
+                  <p class="card-description">
+                    Lengkapi Data Berkas, (KK), (Ijazah) dan (Akte) Peserta Baru Sebagai Persyaratan Calon Didik Baru.
+                  </p>
+                  
+                  <form class="forms-sample" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    
+                    <div class="form-group row">
+                      <label for="exampleInputEmail2" class="col-sm-3 col-form-label">No-KTP</label>
+                      <div class="col-sm-9">
+                        <input type="text" class="form-control" id="exampleInputEmail2" placeholder="Nomor KTP Peserta" name="no_ktp" required value="{{log.no_ktp}}">
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label for="exampleInputMobile" class="col-sm-3 col-form-label">Nama Lengkap</label>
+                      <div class="col-sm-9">
+                        <input type="text" class="form-control" id="exampleInputMobile" placeholder="Nama Lengkap" name="nama_lengkap" required value="{{log.nama_lengkap}}">
+                      </div>
+                    </div>
+                  
+                    <div class="form-group row">
+                      <label for="exampleInputPassword2" class="col-sm-3 col-form-label">Upload Scann (KK)</label>
+                      <div class="col-sm-9">
+                        <input type="file" class="form-control" id="exampleInputPassword2" name="berkas_kk" required>
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label for="exampleInputPassword2" class="col-sm-3 col-form-label">Upload Scann (Ijazah atau surat keterangan kelulusan dari sekolah masing-masing)</label>
+                      <div class="col-sm-9">
+                        <input type="file" class="form-control" id="exampleInputPassword2" name="berkas_ijazah" required>
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label for="exampleInputPassword2" class="col-sm-3 col-form-label">Upload Scann (Akte)</label>
+                      <div class="col-sm-9">
+                        <input type="file" class="form-control" id="exampleInputPassword2" name="berkas_akte" required>
+                      </div>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary me-2">Submit</button>
+                  </form>
+                  
+                  
+                  {% endfor %}
+                </div>
+              </div>
+        </div>
+    </div>
+</div>
+
+{% include "Master_pendaftaran/Master_peserta/style_bawah.html" %}

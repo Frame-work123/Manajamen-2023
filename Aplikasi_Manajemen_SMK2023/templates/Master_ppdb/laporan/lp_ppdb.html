@@ -1,0 +1,86 @@
+<!<html>
+<head>
+  <title>LAPORAN</title>
+</head>
+<body>
+<link href="/static/print/style.css" rel="stylesheet" type="text/css" />
+
+<style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+ 
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 10px;
+        }
+        th {
+            background-color: rgb(19, 110, 170);
+            color: white;
+        }
+        tr:hover {background-color: #f5f5f5;}
+</style>
+<div id="container">
+  <h1 align="center">
+    <strong style="font-family:'Times New Roman', Times, serif">
+  LAPORAN DATA (PPDB) SMK</strong>
+  <p style="font-size: 12px;">SMK INSAN TERPADU, KEC. PAITON, KAB.PROBOLINGGO</p>
+</h1>
+  <div id="body">
+                    <table>
+                      <thead>
+                        <tr>
+                          <th>No</th>
+                          <th>No KTP</th>
+                          <th>Nama Lengkap</th>
+                          <th>Alamat</th>
+                          <th>Jenis Kelamin</th>
+                          <th>Tempat Lahir</th>
+                          <th>Tanggal Lahir</th>
+                          <th>No Hp</th>
+                          <th>Pendidikan Akhir</th>
+                          <th>Jurusan Di Pilih</th>
+                          <th>Status Penerimaan</th>
+                          <th>Foto Didik Baru</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+
+                        {% for tampil in data_ppdb %}
+                        <tr>
+                        <td>{{forloop.counter}}</td>
+                        <td>{{tampil.no_ktp}}</td>
+                        <td>{{tampil.nama_lengkap}}</td>
+                        <td>{{tampil.alamat}}</td>
+                        <td>{{tampil.jk}}</td>
+                        <td>{{tampil.tempat_lahir}}</td>
+                        <td>{{tampil.tanggal_lahir}}</td>
+                        <td>{{tampil.nohp}}</td>
+                        <td>{{tampil.pendidikan_akhir}}</td>
+                        <td>{{tampil.nama_jurusan}}</td>
+                        <td>
+                          {% if tampil.status_penerimaan == 'Di Terima' %}
+                          <a class="btn btn-primary btn-xs"><i class="fa fa-check"></i>{{tampil.status_penerimaan}}</a>
+                          {% elif tampil.status_penerimaan == 'Di Tolak' %}
+                          <a class="btn btn-warning btn-xs"><i class="fa fa-remove"></i>{{tampil.status_penerimaan}}</a>
+                          {% else %}
+                          <a class="btn btn-info btn-xs"><i class="fa fa-check"></i>Belum Di Proses</a>
+                          {% endif %}
+                        </td>
+                        <td> <img src="{{ tampil.foto.url }}" style="width: 50px"></td>
+                       
+                        </tr>   
+                        {% endfor %}
+                      </tbody>
+                    </table>
+                    <div align="right">
+                      <h2>TTD, {{tanggal_sekarang}}</h2><br><br><br><br>
+                      <h2>(.........................)</h2>
+                    </div>
+                  </div>
+                </div>
+              </body>
+              </html>

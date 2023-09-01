@@ -1,0 +1,115 @@
+{% include "head_atas.html" %}
+<div class="row">
+              <div class="col-md-12 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2><i class="fa fa-files-o"></i> <b>EDIT DATA SISWA</b></h2>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+                    <br />
+                    <form class="form-horizontal form-label-left" enctype="multipart/form-data" method="post">
+                    {% csrf_token %}
+                       <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">NIS </label>
+                        <div class="col-md-9 col-sm-9 col-xs-12">
+                          <input type="text" class="form-control" placeholder="Enter NIS" required name="nis" maxlength="11" onkeypress="return event.charCode < 48 || event.charCode <57" value="{{edit_siswa.nis}}">
+                        </div>
+                      </div>
+                       <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Nama Lengkap</label>
+                        <div class="col-md-9 col-sm-9 col-xs-12">
+                          <input type="text" class="form-control" name="nama_lengkap" required placeholder="Enter Nama Lengkap" onkeypress="return event.charCode < 48 || event.charCode >57" value="{{edit_siswa.nama_lengkap}}">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Jenis Kelamin</label>
+                        <div class="col-md-9 col-sm-9 col-xs-12">
+      <p>
+      <input type="radio" class="flat" name="jk" id="genderM" value="Laki-Laki" required {% if edit_siswa.jk == "Laki-Laki" %}checked="checked"{% endif %}/> Laki-Laki <br>
+      <input type="radio" class="flat" name="jk" id="genderF" value="Perempuan"  {% if edit_siswa.jk == "Perempuan" %}checked="checked"{% endif %}/> Perempuan
+      </p>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Alamat Lengkap</label>
+                        <div class="col-md-9 col-sm-9 col-xs-12">
+                          <input type="text" class="form-control" name="alamat" required placeholder="Enter Alamat Lengkap" value="{{edit_siswa.alamat}}">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Tempat Lahir</label>
+                        <div class="col-md-9 col-sm-9 col-xs-12">
+                          <input type="text" class="form-control" name="tempat_lahir" required placeholder="Enter Tempat Lahir" value="{{edit_siswa.tempat_lahir}}">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Tanggal Lahir</label>
+                        <div class="col-md-9 col-sm-9 col-xs-12">
+                          <input type="date" class="form-control" name="tanggal_lahir" required placeholder="Enter Tanggal Lahir" value="{{edit_siswa.tanggal_lahir}}">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">No HP</label>
+                        <div class="col-md-9 col-sm-9 col-xs-12">
+                          <input type="text" class="form-control" name="nohp" required placeholder="Enter No HP" maxlength="12" value="{{edit_siswa.nohp}}">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Jurusan</label>
+                        <div class="col-md-9 col-sm-9 col-xs-12">
+                          <select name="jurusan" required class="form-control">
+                            <option>{{edit_siswa.jurusan}}</option>
+                            <option value="">Pilih Jurusan</option>
+                            {% for jurusan in select_jurusan %}
+                            <option>{{jurusan.nama_jurusan}}</option>
+                            {% endfor %}
+                          </select>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Kelas</label>
+                        <div class="col-md-9 col-sm-9 col-xs-12">
+                          <select name="kelas" required class="form-control">
+                            <option>{{edit_siswa.kelas}}</option>
+                            <option value="">Pilih Kelas</option>
+                            {% for kelas in select_kelas %}
+                            <option>{{kelas.nama_kelas}}</option>
+                            {% endfor %}
+                          </select>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Tahun Masuk</label>
+                        <div class="col-md-9 col-sm-9 col-xs-12">
+                          <select name="tahun_masuk" required class="form-control">
+                            <option>{{edit_siswa.tahun_masuk}}</option>
+                            <option value="">Pilih Tahun Masuk</option>
+                            <option>2023</option>
+                            <option>2022</option>
+                            <option>2021</option>
+                            <option>2020</option>
+                            <option>2019</option>
+                            <option>2018</option>
+                            <option>2017</option>
+                            <option>2016</option>
+                            <option>2015</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="ln_solid"></div>
+                      <div class="form-group">
+                        <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-3">
+                          <button type="submit" class="btn btn-success">
+                            <i class="fa fa-save"></i> Submit</button>						              
+                          <a href="{% url 'Siswa' %}" class="btn btn-danger">
+                            <i class="fa fa-close"></i> Cancel</a>
+                        </div>
+                      </div>
+
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+{% include "head_bawah.html" %}

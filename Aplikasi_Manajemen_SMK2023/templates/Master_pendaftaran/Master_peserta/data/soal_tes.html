@@ -1,0 +1,60 @@
+{% include "Master_pendaftaran/Master_peserta/style_atas.html" %}
+   <div class="main-panel">          
+        <div class="content-wrapper">
+          <div class="row">
+            <div class="col-12 grid-margin stretch-card">
+              <div class="card">
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="card-body">
+                      {% if messages %}
+                        {% for info in messages %}
+                        <div class="alert alert-warning mt-4" role="alert">
+                        <i class="ti-info-alt-outline"></i>Info.. <strong>{{info}}</strong>
+                        </div>
+                        {% endfor %}
+                        {% endif %}
+                      <h4 class="card-title">Tes Ujian Online (PPDB) SMK</h4>
+                      {% for log in login %}
+                        <form method="post">
+                          {% csrf_token %}
+                          <h5>Peserta:</h5>
+                          <label>Nama Lengkap : {{log.nama_lengkap}} 
+                            <input type="hidden" name="nama_lengkap" value="{{log.nama_lengkap}}" readonly></label><br>
+                          <label>Nomor KTP : {{log.no_ktp}} 
+                            <input type="hidden" name="no_ktp" value="{{log.no_ktp}}" readonly></label>
+                      <ol>                        
+                      {% for tes in soal %}
+                      <input type="hidden" name="soal_mapel" value="{{tes.soal_mapel}}">
+                      <input type="hidden" name="nama_mapel" value="{{tes.nama_mapel}}">
+                      <input type="hidden" name="tanggal_tes" value="{{tanggal_sekarang}}">
+                        <blockquote class="blockquote">
+                            <li ><b>{{tes.soal_mapel}}</b>
+                               <ol type="A">
+                                  <li><input type="radio" name="jawaban" value="{{tes.a}}"> {{tes.a}}</li>
+                                  <li><input type="radio" name="jawaban" value="{{tes.b}}"> {{tes.b}}</li>
+                                  <li><input type="radio" name="jawaban" value="{{tes.c}}"> {{tes.c}}</li>
+                                  <li><input type="radio" name="jawaban" value="{{tes.d}}"> {{tes.d}}</li>
+                                </ol>
+                            </li>
+                        </blockquote>
+                      {% endfor %}
+                      </ol>
+                      <button type="submit" class="btn btn-success me-2">Submit</button>
+                    </form>
+                    {% endfor %}
+                    </div>
+                  </div>
+                 
+                </div>
+              </div>
+            </div>
+           
+            </div>
+            </div>
+          </div>
+        </div>
+        </div>
+        </div>
+
+{% include "Master_pendaftaran/Master_peserta/style_bawah.html" %}

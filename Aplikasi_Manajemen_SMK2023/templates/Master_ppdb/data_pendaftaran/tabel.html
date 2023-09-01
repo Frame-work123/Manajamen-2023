@@ -1,0 +1,92 @@
+{% include "Master_ppdb/head_atas.html" %}
+{% if messages %}
+{% for info in messages %}
+ <div class="alert alert-success alert-dismissible fade in" role="alert">
+<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+  <span aria-hidden="true">×</span>
+</button>
+<strong>{{info}}</strong>
+</div>
+{% endfor %}
+{% endif %}
+<div class="row">
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2><i class="fa fa-navicon"></i> <b>FORM DETAIL DATA CALON PENDAFTARAN (PPDB)</b></h2>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+                    <table id="datatable-buttons" class="table table-striped table-bordered">
+                      <thead>
+                        <tr>
+                          <th>No</th>
+                          <th>Transfer</th>
+                          <th>No KTP</th>
+                          <th>Nama Lengkap</th>
+                          <th>Alamat</th>
+                          <th>Jenis Kelamin</th>
+                          <th>Tempat Lahir</th>
+                          <th>Tanggal Lahir</th>
+                          <th>No Hp / For WA</th>
+                          <th>E-mail</th>
+                          <th>Pendidikan Akhir</th>
+                          <th>Nama Ibu</th>
+                          <th>Nama Ayah</th>
+                          <th>Pekerjaan Ibu</th>
+                          <th>Pekerjaan Ayah</th>
+                          <th>Jurusan Di Pilih</th>
+                          <th>Status Penerimaan</th>
+                          <th>Proses</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+
+                        {% for tampil in data_pendaftaran %}
+                        <tr>
+                        <td>{{forloop.counter}}</td>
+                        <td>
+                          <a href="{% url 'transfer_data' tampil.id %}" class="btn btn-xs btn-default" onclick="return confirm('Silakan Transfer Ke Data Siswa')"><i class="fa fa-user"></i> Transfer Data Siswa</a>
+                        </td>
+                        <td>{{tampil.no_ktp}}</td>
+                        <td>{{tampil.nama_lengkap}}</td>
+                        <td>{{tampil.alamat}}</td>
+                        <td>{{tampil.jk}}</td>
+                        <td>{{tampil.tempat_lahir}}</td>
+                        <td>{{tampil.tanggal_lahir}}</td>
+                        <td align="center">
+                          <a href="https://wa.me/{{tampil.nohp}}?text={{tampil.no_ktp}}%3A%0A{{tampil.nama_lengkap}}%3A%0A{{tampil.jk}}%3A%0ASilahkan Lakukan Pemberitahuan Kepada Pendaftar Sebagai Penerimaan PPDB..?" target="_blank"> 
+                          <img src="/static/icon/wa.png" style="width: 30px">
+                          {{tampil.nohp}}
+                          </a>
+                        </td>
+                        <td>{{tampil.email}}</td>
+                        <td>{{tampil.pendidikan_akhir}}</td>
+                        <td>{{tampil.nama_ibu}}</td>
+                        <td>{{tampil.nama_ayah}}</td>
+                        <td>{{tampil.pekerjaan_ibu}}</td>
+                        <td>{{tampil.pekerjaan_ayah}}</td>
+                        <td>{{tampil.nama_jurusan}}</td>
+                        <td>
+                          {% if tampil.status_penerimaan == 'Di Terima' %}
+                          <a class="btn btn-primary btn-xs"><i class="fa fa-check"></i>{{tampil.status_penerimaan}}</a>
+                          {% elif tampil.status_penerimaan == 'Di Tolak' %}
+                          <a class="btn btn-warning btn-xs"><i class="fa fa-remove"></i>{{tampil.status_penerimaan}}</a>
+                          {% else %}
+                          <a class="btn btn-info btn-xs"><i class="fa fa-check"></i>Belum Di Proses</a>
+                          {% endif %}
+                        </td>
+                        <td>
+                        <a href="{% url 'edit_ppdb' tampil.id %}" class="btn btn-xs btn-info" onclick="return confirm('Apakah Anda Yakin Ingin Mengedit Data')"><i class="fa fa-edit"></i> Edit</a>
+                    <!-- -------------------- -->
+                        <a href="{% url 'hapus_ppdb' tampil.id %}" class="btn btn-xs btn-danger" onclick="return confirm('Apakah Anda Yakin Ingin Menghapus Data')"><i class="fa fa-trash-o"></i> Hapus</a>
+                        </td>
+                        </tr>   
+                        {% endfor %}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div></div></div>
+    {% include "Master_ppdb/head_bawah.html" %}

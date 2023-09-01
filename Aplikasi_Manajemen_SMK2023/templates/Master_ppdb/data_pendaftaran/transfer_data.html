@@ -1,0 +1,125 @@
+{% include "Master_ppdb/head_atas.html" %}
+<div class="row">
+{% if edit_pendaftaranppdb.status_penerimaan == 'Di Terima' %}
+  <div class="col-md-3 col-xs-12 widget widget_tally_box">
+                        <div class="x_panel ui-ribbon-container fixed_height_390">
+                          <div class="ui-ribbon-wrapper">
+                            <div class="ui-ribbon">
+                              (PPDB)
+                            </div>
+                          </div>
+                          <div class="x_title">
+                            <h2>Calon Siswa Baru</h2>
+                            <div class="clearfix"></div>
+                          </div>
+                          <div class="x_content">
+
+                            <div style="text-align: center; margin-bottom: 17px">
+                               <!-- class="img-circle profile_img" -->
+                               <img src="{{ edit_pendaftaranppdb.foto.url }}" style="width: 50px">
+                            </div>
+
+                            <h3 class="name_title">{{edit_pendaftaranppdb.nama_lengkap}}</h3>
+                            <p>{{edit_pendaftaranppdb.email}}</p>
+
+                            <div class="divider"></div>
+
+                            <p>Calon Peserta Didik Baru SMK INSAN TERPADU</p>
+                            <div style="text-align: center; margin-bottom: 17px">
+                            <a href="{% url 'edit_foto_ppdb' edit_pendaftaranppdb.id %}" class="btn btn-xs btn-primary" onclick="return confirm('Apakah Anda Yakin Ingin Mengedit Data')"><i class="fa fa-edit"></i> Edit Foto Siswa </a>
+                          </div>
+                          </div>
+                        </div>
+                      </div>
+
+              <div class="col-md-7 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2><i class="fa fa-files-o"></i> <b>TRANSFER SISWA DIDIK BARU (PPDB)</b></h2>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+                    <br />
+                    <form class="form-horizontal form-label-left" enctype="multipart/form-data" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" class="form-control" name="jk" value="{{edit_pendaftaranppdb.jk}}">
+                    <input type="hidden" class="form-control" placeholder="Enter Alamat" required name="alamat" value="{{edit_pendaftaranppdb.alamat}}">
+                    <input type="hidden" class="form-control" name="jurusan" value="{{edit_pendaftaranppdb.nama_jurusan}}" >
+                    <input type="hidden" required name="tempat_lahir" value="{{edit_pendaftaranppdb.tempat_lahir}}">
+                    <input type="hidden" name="tanggal_lahir" value="{{edit_pendaftaranppdb.tanggal_lahir}}">
+                    <input type="hidden" name="kelas" value="X">
+                    <input type="hidden" name="foto" value="{{edit_pendaftaranppdb.foto}}">
+                    <input type="hidden" class="form-control" placeholder="Enter No Hp" required name="nohp" value="{{edit_pendaftaranppdb.nohp}}" maxlength="12">
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">NIS</label>
+                        <div class="col-md-9 col-sm-9 col-xs-12">
+                          <input type="text" class="form-control" placeholder="Enter NIS Baru" required name="nis" maxlength="6" onkeypress="return event.charCode < 48 || event.charCode <57">
+                        </div>
+                      </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">No (KK)</label>
+                        <div class="col-md-9 col-sm-9 col-xs-12">
+                          <input type="text" class="form-control" placeholder="Enter No (KK)" required name="no_kk" value="{{edit_pendaftaranppdb.no_kk}}" maxlength="16" readonly>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">No KTP</label>
+                        <div class="col-md-9 col-sm-9 col-xs-12">
+                          <input type="text" class="form-control" placeholder="Enter No KTP" required name="no_ktp" value="{{edit_pendaftaranppdb.no_ktp}}" maxlength="16" readonly>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Nama Lengkap</label>
+                        <div class="col-md-9 col-sm-9 col-xs-12">
+                          <input type="text" class="form-control" placeholder="Enter Nama Lengkap" required name="nama_lengkap" value="{{edit_pendaftaranppdb.nama_lengkap}}" readonly>
+                        </div>
+                      </div>
+
+
+                      
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Status Penerimaan</label>
+                        <div class="col-md-9 col-sm-9 col-xs-12">
+      <p>
+      <input type="radio" class="flat" name="status_penerimaan" id="genderM" value="Di Tolak" required {% if edit_pendaftaranppdb.status_penerimaan == "Di Tolak" %}checked="checked"{% endif %}/> Di Tolak <br>
+      <input type="radio" class="flat" name="status_penerimaan" id="genderF" value="Di Terima"  {% if edit_pendaftaranppdb.status_penerimaan == "Di Terima" %}checked="checked"{% endif %}/> Di Terima
+      </p>
+                        </div>
+                      </div>
+                     
+                      <div class="ln_solid"></div>
+                      <div class="form-group">
+                        <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-3">
+                          <button type="submit" class="btn btn-success">
+                            <i class="fa fa-save"></i> Transfer Data </button>						              
+                          <a href="{% url 'check_ppdb' %}" class="btn btn-danger">
+                            <i class="fa fa-close"></i> Cancel</a>
+                        </div>
+                      </div>
+
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+            </div>
+{% elif edit_pendaftaranppdb.status_penerimaan == 'Di Tolak' %}
+<div class="alert alert-danger alert-dismissible fade in" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span>
+                    </button>
+                    <strong>Ma'af..!</strong> <br>
+                    <h3>Calon Siswa Ini Sudah Di Tolak.!</h3>
+                  </div>
+{% else %}
+<div class="alert alert-warning alert-dismissible fade in" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span>
+                    </button>
+                    <strong>Ma'af..!</strong> <br>
+                    <h3>Calon Siswa Ini Belum Di Proses, Silakan Proses Di Bagian Edit.!</h3>
+                  </div>
+
+{% endif %}
+            </div>
+            </div></div>
+
+{% include "Master_ppdb/head_bawah.html" %}

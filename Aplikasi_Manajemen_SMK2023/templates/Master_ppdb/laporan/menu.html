@@ -1,0 +1,55 @@
+{% include "Master_ppdb/head_atas.html" %}
+<div class="row">
+	 <div class="col-md-9 col-sm-6 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2><i class="fa fa-bars"></i> MENU LAPORAN (PPDB)</h2>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+
+                    <div class="col-xs-3">
+                      <!-- required for floating -->
+                      <!-- Nav tabs -->
+                      <ul class="nav nav-tabs tabs-left">
+                        <li class="active"><a href="#home" data-toggle="tab"><i class="fa fa-download"></i> Laporan</a>
+                        </li>
+                        <li><a href="#lp_siswa" data-toggle="tab"><i class="fa fa-files-o"></i> Laporan (PPDB)</a>
+                        </li>
+                        <li><a href="#lp_guru" data-toggle="tab"><i class="fa fa-files-o"></i> Laporan Nilai (PPDB)</a>
+                        </li>
+                      </ul>
+                    </div>
+
+                    <div class="col-xs-9">
+                      <!-- Tab panes -->
+                      <div class="tab-content">
+                        <div class="tab-pane active" id="home">
+                          <p class="lead"><b>Laporan</b></p>
+                          <p align="justify">Lakukan proses pembuatan laporan tentang manajemen sekolah dengan memilih fitur menu di halaman ini. Dan lakukan sesuai dengan kebutuhan manajemen.</p>
+                        </div>
+                        <div class="tab-pane" id="lp_siswa">
+                        	<p class="lead"><b>Laporan Data Penerimaan Peserta Didik Baru (PPDB)</b></p>
+                        	
+                    			<br>
+                    			 <hr>
+                    			<a href="{% url 'laporan_ppdb' %}" target="_blank" class="btn btn-primary pull-right" style="margin-right: 5px;"><i class="fa fa-print"></i> Cetak Laporan</a>
+                        	
+                        </div>
+                        <div class="tab-pane" id="lp_guru">
+                          <p class="lead"><b>Laporan Nilai Tes (PPDB)</b></p>
+                          <hr>
+                          <a href="{% url 'laporan_nilai_ppdb' %}" target="_blank" class="btn btn-primary pull-right" style="margin-right: 5px;"><i class="fa fa-print"></i> Cetak Laporan</a>
+                        </div>
+                       
+                      </div>
+                    </div>
+
+                    <div class="clearfix"></div>
+
+                  </div>
+                </div>
+              </div>
+</div>
+</div></div></div>
+{% include "Master_ppdb/head_bawah.html" %}

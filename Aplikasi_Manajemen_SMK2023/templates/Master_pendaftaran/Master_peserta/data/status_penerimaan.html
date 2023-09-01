@@ -1,0 +1,87 @@
+{% include "Master_pendaftaran/Master_peserta/style_atas.html" %}
+<div class="main-panel">        
+    <div class="content-wrapper">
+        <div class="row">
+          {% if messages %}
+        {% for info in messages %}
+        <div class="alert alert-warning mt-4" role="alert">
+        <i class="ti-info-alt-outline"></i>Info.. <strong>{{info}}</strong>
+        </div>
+        {% endfor %}
+        {% endif %}
+          
+                
+                {% for log in login %}
+                
+                  <div class="col-md-6 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title">Profil Peserta Didik Baru</h4>
+                  
+                  <div class="row">
+                    <div class="col-md-6">
+                      <address>
+                        <p class="fw-bold">Nama Lengkap</p>
+                        <p>
+                          Alamat
+                        </p>
+                        <p>
+                           Jenis Kelamin
+                        </p>
+                        <p>
+                          No-Hp
+                        </p>
+                      </address>
+                    </div>
+                    <div class="col-md-6">
+                      <address class="text-primary">
+                        <p class="fw-bold">
+                          {{log.nama_lengkap}}
+                        </p>
+                        <p class="mb-2">
+                          {{log.alamat}}
+                        </p>
+                        <p class="fw-bold">
+                          {{log.jk}}
+                        </p>
+                        <p>
+                          {{log.nohp}}
+                        </p>
+                      </address>
+                    </div>
+                <img src="/static/icon/6.jpg">
+                <div class="card-body">                  
+                  <div class="card-body">
+                    <h4 class="card-title">Info Penerimaan</h4>
+                    {% for check in check_data %}
+                    {% if log.no_ktp == check.no_ktp %}
+                    {% if check.status_penerimaan == 'Di Terima' %}
+                  <blockquote class="blockquote blockquote-primary">
+                    <p>Penerimaan Peserta Didik Baru Mengonfirmasikan Bahwa Pengajuan Anda Di Setujui. Silakan Hub : 082228613407</p><br>
+                    <footer class="blockquote-footer">Pengajuan (PPDB) : <b>{{check.status_penerimaan}}</b></footer>
+                  </blockquote>
+                  {% elif check.status_penerimaan == 'Di Tolak' %}
+                  <blockquote class="blockquote blockquote-primary">
+                    <p>Penerimaan Peserta Didik Baru Mengonfirmasikan Bahwa Pengajuan Anda Tidak Memenuhi Syarat. Silakan Hub : 082228613407</p><br>
+                    <footer class="blockquote-footer">Pengajuan (PPDB) : <b>{{check.status_penerimaan}}</b></footer>
+                  </blockquote>
+                  {% else %}
+                  <blockquote class="blockquote blockquote-primary">
+                    <p>Penerimaan Peserta Didik Baru Mengonfirmasikan Bahwa Pengajuan Anda Belum Di Periksa. Silakan Hub : 082228613407</p><br>
+                    <footer class="blockquote-footer">Pengajuan (PPDB) : <b>{{check.status_penerimaan}}</b></footer>
+                  </blockquote>
+                  {% endif %}
+                  {% endif %}
+                  {% endfor %}
+                </div>
+                </div>
+              </div>
+            </div>
+                  
+                  </div></div>
+                  {% endfor %}
+                
+    </div>
+</div>
+
+{% include "Master_pendaftaran/Master_peserta/style_bawah.html" %}
